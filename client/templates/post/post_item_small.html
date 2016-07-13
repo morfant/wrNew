@@ -1,0 +1,11 @@
+<template name="postItemSmall">
+  <div class="post">
+    <div class="post-content">
+      <h3>{{title}}</h3>
+      <span>{{submitted}}</span>
+      <br><br>
+      <!-- <textarea name="text" cols="100" rows="10" style="resize:none" readonly="readonly" class="form-control">{{text}}</textarea> -->
+    </div>
+    <a href="{{pathFor 'postPage'}}" class="discuss btn btn-default">edit</a>
+  </div>
+</template>
