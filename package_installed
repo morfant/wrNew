@@ -1,0 +1,15 @@
+meteor add mizzao:bootstrap-3
+meteor add underscore
+meteor add meteorhacks:kadira
+meteor add iron:router
+meteor add session
+meteor add check
+meteor add sacha:spin
+meteor add ian:accounts-ui-bootstrap-3
+meteor add accounts-password
+
+meteor remove autopublish
+meteor remove insecure
+
+meteor add meteorhacks:npm //reboot
+
