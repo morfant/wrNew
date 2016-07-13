@@ -7,6 +7,8 @@ meteor add check
 meteor add sacha:spin
 meteor add ian:accounts-ui-bootstrap-3
 meteor add accounts-password
+meteor add http
+
 
 meteor remove autopublish
 meteor remove insecure

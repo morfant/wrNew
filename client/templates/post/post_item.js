@@ -39,8 +39,20 @@ Template.postItem.events({
         e.preventDefault();
         Meteor.call('upvote', this._id);
     },
-    'click .categoryButton .onNow': function(e){
+    'click .categoryButton': function(e, template){
         e.preventDefault();
-        console.log("onNow button click!");
+        var btnVal = $(e.target).attr("value");
+        Meteor.call('updatePostStatus', this._id, btnVal, true,
+          function(error, result){ //callback of Meteor.call()
+            if (result) {
+              if (btnVal == "onNow")
+                template.find('#onNow').checked = true;
+              else if (btnVal == "upNext")
+                template.find('#upNext').checked = true;
+              else if (btnVal == "lastEp")
+                template.find('#lastEp').checked = true;
+            }
+          });
+        console.log(btnVal + " button click!");
     }
 });
