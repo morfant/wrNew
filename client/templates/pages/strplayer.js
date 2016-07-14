@@ -48,7 +48,7 @@ Template.strplayer.rendered = function() {
     //         }
     // });
     Meteor.call('checkSrc', "http://jjwc.cafe24.com:8000/mpd.mp3", function(error, result){
-        console.log(result);
+        // console.log(result);
     });
  
 

@@ -41,6 +41,7 @@ Template.postItem.events({
     },
     'click .categoryButton': function(e, template){
         e.preventDefault();
+        // console.log(e.find('#onNow'));
         var btnVal = $(e.target).attr("value");
         Meteor.call('updatePostStatus', this._id, btnVal, true,
           function(error, result){ //callback of Meteor.call()
