@@ -33,3 +33,6 @@ npm-container
 http
 tomi:upload-jquery
 tomi:upload-server
+froala:editor-reactive
+random
+williamledoux:bootstrap-toggle

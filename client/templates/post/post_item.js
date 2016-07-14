@@ -2,6 +2,13 @@ var POST_HEIGHT = 80;
 var Positions = new Meteor.Collection(null); // null means local collection
 
 Template.postItem.helpers({
+  postId: function() {
+    return this._id;
+  },
+  getImg: function() {
+    console.log('.uploads/' + this.imgId);
+    return '.uploads/' + this.imgId
+  },
   ownPost: function() {
       return this.userId === Meteor.userId();
   },
@@ -38,22 +45,5 @@ Template.postItem.events({
     'click .upvotable': function(e) {
         e.preventDefault();
         Meteor.call('upvote', this._id);
-    },
-    'click .categoryButton': function(e, template){
-        e.preventDefault();
-        // console.log(e.find('#onNow'));
-        var btnVal = $(e.target).attr("value");
-        Meteor.call('updatePostStatus', this._id, btnVal, true,
-          function(error, result){ //callback of Meteor.call()
-            if (result) {
-              if (btnVal == "onNow")
-                template.find('#onNow').checked = true;
-              else if (btnVal == "upNext")
-                template.find('#upNext').checked = true;
-              else if (btnVal == "lastEp")
-                template.find('#lastEp').checked = true;
-            }
-          });
-        console.log(btnVal + " button click!");
     }
 });

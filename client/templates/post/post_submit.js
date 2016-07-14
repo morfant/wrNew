@@ -1,8 +1,24 @@
+var randomKey = "";
+
 Template.postSubmit.created = function() {
   Session.set('postSubmitErrors', {});
-}
+
+  randomKey = Random.id();
+  console.log("in postsubmit.created(): " + randomKey);
+};
+
+
+Template.postSubmit.rendered= function() {
+
+};
+
 
 Template.postSubmit.helpers({
+  randomKey: function() {
+    console.log("in postSubmit helpers randomKey(): " + randomKey);
+    return {uniqueID: randomKey};
+  },
+
   errorMessage: function(field) {
     return Session.get('postSubmitErrors')[field];
   },
@@ -17,7 +33,8 @@ Template.postSubmit.events({
 
     var post = {
       title: $(e.target).find('[name=title]').val(),
-      text: $(e.target).find('[name=text]').val()
+      text: $(e.target).find('[name=text]').val(),
+      imgId: randomKey
     };
 
     var errors = validatePost(post);

@@ -172,7 +172,12 @@ body {
     left: 0px;
     height: 10px;
 }
-.categoryButton{
+.categoryButtons{
+    position: relative;
+    left: 800px;
+    height: 10px;
+}
+.toggleButton{
     position: relative;
     left: 800px;
     height: 10px;

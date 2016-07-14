@@ -15,3 +15,8 @@ meteor remove insecure
 
 meteor add meteorhacks:npm //reboot
 
+meteor add tomi:upload-server
+meteor add tomi:upload-jquery
+
+meteor add froala:editor-reactive
+meteor add random
