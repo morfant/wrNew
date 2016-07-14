@@ -90,6 +90,8 @@ standard-minifier-js@1.0.8
 stylus@2.512.4
 templating@1.1.13
 templating-tools@1.0.4
+tomi:upload-jquery@2.4.0
+tomi:upload-server@1.3.4_1
 tracker@1.0.14
 ui@1.0.11
 underscore@1.0.9
