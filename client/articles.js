@@ -6,14 +6,14 @@ Template.streamingNotice.created = function() {
   upNextPost = Posts.findOne({isUpNext: true});
 }
 
-Template.streamingNotice.rendered = function() {
-  onNowPost = Posts.findOne({isOnNow: true});
-  upNextPost = Posts.findOne({isUpNext: true});
-  console.log(onNowPost);
-  console.log(upNextPost);
-}
 
 Template.streamingNotice.helpers({
+  onNowExist: function() {
+    return !$.isEmptyObject(onNowPost);
+  },
+  upNextExist: function() {
+    return !$.isEmptyObject(upNextPost);
+  },
   onNowTitle: function() {
     return onNowPost.title;
   },
@@ -32,3 +32,11 @@ Template.streamingNotice.helpers({
 Template.streamingNotice.events({
 
 });
+
+
+Template.streamingNotice.rendered = function() {
+  onNowPost = Posts.findOne({isOnNow: true});
+  upNextPost = Posts.findOne({isUpNext: true});
+  // console.log(onNowPost);
+  // console.log(upNextPost);
+}
