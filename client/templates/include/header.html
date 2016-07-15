@@ -10,6 +10,7 @@
           <span class="icon-bar"></span>
         </button>
 
+<!-- {{#if getOnNowExist}} -->
 
         <audio id="audio">
           <source id="audioSource" src="" type="audio/mpeg" />
@@ -22,7 +23,7 @@
 
         <img class="playbutton" src="/images/big_play.jpg" height="55" width="50">  
         <img class="pausebutton" src="/images/big_pause.jpg" height="70" width="70">       
-
+<!-- {{/if}} -->
       </div>
 
 
@@ -33,10 +34,14 @@
           {{#if currentUser}}<li><a href="{{pathFor 'postSubmit'}}">Submit</a></li>{{/if}}
           {{#if currentUser}}<li><a href="{{pathFor 'streamURLSetting'}}">streamSet</a></li>{{/if}}
           {{#if currentUser}}<li><a href="{{pathFor 'bgImgURLSetting'}}">bgImgSet</a></li>{{/if}}
+
+{{#unless getOnNowExist}}
+<li><a href="">Next live 05:00 KST (UTC + 9), 17th July Sunday</a></li>
+{{/unless}}
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          {{> loginButtons}}
+          <!-- {{> loginButtons}} -->
         </ul>
 
       </div>

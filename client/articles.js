@@ -1,5 +1,7 @@
 var onNowPost = {};
 var upNextPost = {};
+// isOnNowExist = false;
+
 
 Template.streamingNotice.created = function() {
   onNowPost = Posts.findOne({isOnNow: true});
@@ -12,7 +14,9 @@ Template.streamingNotice.helpers({
 
   },
   onNowExist: function() {
-    return !$.isEmptyObject(onNowPost);
+    isOnNowExist = !$.isEmptyObject(onNowPost);
+    // console.log(isOnNowExist);
+    return isOnNowExist;
   },
   upNextExist: function() {
     return !$.isEmptyObject(upNextPost);
@@ -21,7 +25,6 @@ Template.streamingNotice.helpers({
     return onNowPost.title;
   },
   onNowText: function() {
-    console.log(onNowPost);
     return onNowPost.text;
   }, 
   upNextTitle: function() {

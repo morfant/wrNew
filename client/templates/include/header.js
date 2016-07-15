@@ -1,4 +1,9 @@
 Template.header.helpers({
+    getOnNowExist: function() {
+        var ison = Posts.find({isOnNow: true}).count(); //reactive
+        // console.log(ison);
+      return ison;
+  },
   activeRouteClass: function(/* route names */) {
     var args = Array.prototype.slice.call(arguments, 0);
     args.pop();
