@@ -2,6 +2,14 @@ var POST_HEIGHT = 80;
 var Positions = new Meteor.Collection(null); // null means local collection
 
 Template.postItem.helpers({
+  getText: function() {
+    console.log(this.text.constructor);
+    var t = '<li>text</li><br><br>78783279797954';
+    console.log(t.constructor);
+    return t
+    // return this.text;
+
+  },
   postId: function() {
     return this._id;
   },

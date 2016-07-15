@@ -12,7 +12,9 @@
 
 
         <audio id="audio">
-          <source src="{{getStreamURL}}" type="audio/mpeg" />
+          <source id="source" src="{{getStreamURL}}" type="audio/mpeg" />
+          <!-- <source id="source" src="http://jjwc.cafe24.com:8000/birdnest.ogg" type="audio/mpeg" /> -->
+          <!-- <source id="source"  type="audio/mpeg" src="http://jjwc.cafe24.com:8000/birdnest.ogg" /> -->
         </audio>
 
         <!-- <img class="playbutton" src="/images/tri.png" height="70" width="70">   -->
@@ -29,6 +31,7 @@
           {{#if currentUser}}<li><a href="{{pathFor 'streamingNotice'}}">Live</a></li>{{/if}}
           {{#if currentUser}}<li><a href="{{pathFor 'postsList'}}">List</a></li>{{/if}}
           {{#if currentUser}}<li><a href="{{pathFor 'postSubmit'}}">Submit</a></li>{{/if}}
+          {{#if currentUser}}<li><a href="{{pathFor 'streamURLSubmit'}}">streamSet</a></li>{{/if}}
         </ul>
 
         <ul class="nav navbar-nav navbar-right">

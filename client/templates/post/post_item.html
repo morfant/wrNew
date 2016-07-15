@@ -3,7 +3,7 @@
     <div class="post-content">
 
 
-      <h3>{{title}}</h3>
+      <h3>{{{title}}}</h3>
       <span>Written at {{submitted}}
       submitted by {{author}} {{#if ownPost}}<a href="{{pathFor 'postEdit'}}">Edit</a>{{/if}}
       </span>
@@ -36,7 +36,12 @@
 </div>
  -->  
       <br><br>
-      <textarea name="text" cols="100" rows="10" style="resize:none" readonly="readonly" class="form-control">{{text}}</textarea>
+
+      <div name="text" cols="100" rows="10" style="resize:none" readonly="readonly" class="post-content">
+      <!-- triple {{{}}} means reading as HTML tag -->
+      {{{text}}}
+      </div>
+
 
       <!-- <img src="/images/7monat.JPG" height="300" width="600"> -->
 

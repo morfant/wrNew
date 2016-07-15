@@ -21,6 +21,7 @@ Template.streamingNotice.helpers({
     return onNowPost.title;
   },
   onNowText: function() {
+    console.log(onNowPost);
     return onNowPost.text;
   }, 
   upNextTitle: function() {

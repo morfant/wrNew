@@ -1,3 +1,5 @@
+var streamurl = "";
+
 Template.header.helpers({
   activeRouteClass: function(/* route names */) {
     var args = Array.prototype.slice.call(arguments, 0);
@@ -9,8 +11,31 @@ Template.header.helpers({
     
     return active && 'active';
   },
-  getStreamURL: function() {
-    return StreamURL.find();
+  getStreamURL: function(){
+    console.log("getStreamURL");
+    // if(streamurl.length){
+    //   console.log("!!");
+    //   return streamurl;
+    // };
+    var data = StreamURL.findOne();
+    if (data){
+      console.log(data);
+      var streamUrl = data.streamURL.url;
+      streamurl = streamUrl;
+      console.log(streamurl);
+      return streamurl;
+    }
+    //  else {
+    //   return 
+
+    // }
+    
+
+
+
+  },
+  getType: function(){
+    return 'audio/mpeg';
   }
 
 });
@@ -20,9 +45,15 @@ Template.header.events({
     
     'click .playbutton': function(e) {
         console.log("playbutton click");
+
+        var src = document.getElementById('source');
+        console.log(src);
+
+        // if (streamurl.length > 0){
         var audio = document.getElementById('audio');
         if (audio.muted == true) audio.muted = false;
         if (audio.paused) audio.play(); // audio will load and then play
+      // }
         
     },
 
@@ -36,3 +67,21 @@ Template.header.events({
 
   
 });
+
+
+Template.header.created= function() {
+
+    // var strURL = StreamURL.find().fetch();
+    // console.log(strURL);
+    // return strURL;
+};
+
+
+Template.header.rendered = function() {
+    // console.log("rendered()");
+    // var data = StreamURL.findOne();
+    // var streamUrl = data.streamURL.url;
+    // streamurl = streamUrl;
+
+};
+

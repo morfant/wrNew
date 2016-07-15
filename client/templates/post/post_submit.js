@@ -27,13 +27,19 @@ Template.postSubmit.helpers({
   }
 });
 
+// $.valHooks.textarea = {
+//   get: function( elem ) {
+//     return elem.value.replace( /\r?\n/g, "\r\n" );
+//   }
+// };
+
 Template.postSubmit.events({
   'submit form': function(e) {
     e.preventDefault();
 
     var post = {
-      title: $(e.target).find('[name=title]').val(),
-      text: $(e.target).find('[name=text]').val(),
+      title: $(e.target).find('[name=title]').val().replace(/[\r\n]/g, "<br />"),
+      text: $(e.target).find('[name=text]').val().replace(/[\r\n]/g, "<br />"),
       imgId: randomKey
     };
 
