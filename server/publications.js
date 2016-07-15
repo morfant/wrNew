@@ -5,3 +5,7 @@ Meteor.publish('posts', function() {
 Meteor.publish('streamUrl', function() {
   return StreamURL.find();
 });
+
+Meteor.publish('bgImgUrl', function() {
+  return BackgroundImageURL.find();
+});

@@ -1,9 +1,9 @@
-var streamURL = 'http://jjwc.cafe24.com:8000/mpd.ogg';
-
-
-
-// Template.upNext.helpers({
-// 	streamLink: 'NOT RUNNING NOW!',
-// 	streamTitle: 'Test title - upNext'
-// });
-
+if (Meteor.isClient) {
+  // This code only runs on the client
+  Template.body.helpers({
+    tasks: function () {
+        console.log("body helpers");
+      return 777
+    }
+  });
+}

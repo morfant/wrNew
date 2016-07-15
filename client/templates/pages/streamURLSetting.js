@@ -14,7 +14,7 @@ Template.streamURLSetting.helpers({
 });
 
 
-getSubmittedURL = function(){
+var getSubmittedURL = function(){
   var data = StreamURL.findOne();
   var url = data.streamURL.url;
   return " : " + url;
@@ -29,13 +29,13 @@ Template.streamURLSetting.events({
       url: $(e.target).find('[name=streamURL]').val()
     };
 
-    console.log(streamUrl);
+    // console.log(streamUrl);
 
     var errors = validateStreamUrl(streamUrl);
     if (errors.streamURL)
       return Session.set('stremURLSubmitErrors', errors);
 
-    console.log("before method call");
+    // console.log("before method call");
 
     Meteor.call('streamURLUpdate', streamUrl, function(error, result) {
       // display the error to the user and abort

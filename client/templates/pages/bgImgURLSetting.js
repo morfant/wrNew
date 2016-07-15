@@ -1,7 +1,5 @@
 Template.bgImgURLSetting.created = function() {
-  console.log("bgImgURLSetting created");
   Session.set('bgImgURLSubmitErrors', {});
-
 };
 
 
@@ -14,29 +12,35 @@ Template.bgImgURLSetting.helpers({
   }
 });
 
-
+var getSubmittedURL_BG = function(){
+  var data = BackgroundImageURL.findOne();
+  var url = data.bgImgURL.url;
+  return " : " + url;
+}
 
 Template.bgImgURLSetting.events({
-  'submit form': function(e) {
+  'submit form': function(e, template) {
     // console.log("click submit");
     e.preventDefault();
 
-    var streamUrl = {
+    var bgImgUrl = {
       url: $(e.target).find('[name=bgImgURL]').val()
     };
 
-    console.log(streamUrl);
+    console.log(bgImgUrl);
 
-    var errors = validateStreamUrl(streamUrl);
+    var errors = validateBgImgUrl(bgImgUrl);
     if (errors.bgImgURL)
       return Session.set('bgImgURLSubmitErrors', errors);
 
-    console.log("before method call");
-
-    Meteor.call('bgImgURLUpdate', streamUrl, function(error, result) {
+    Meteor.call('bgImgURLUpdate', bgImgUrl, function(error, result) {
       // display the error to the user and abort
       if (error)
         return throwError(error.reason);
+      if (result){
+
+        template.find('#submitResult').textContent = getSubmittedURL_BG();
+      }
       
       // Router.go('postPage', {_id: result._id});  
     });
@@ -46,6 +50,6 @@ Template.bgImgURLSetting.events({
 
 
 Template.bgImgURLSetting.rendered = function() {
-
+  this.find('#submitResult').textContent = getSubmittedURL_BG();
 };
 

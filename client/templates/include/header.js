@@ -1,5 +1,3 @@
-var streamurl = "";
-
 Template.header.helpers({
   activeRouteClass: function(/* route names */) {
     var args = Array.prototype.slice.call(arguments, 0);
@@ -10,47 +8,24 @@ Template.header.helpers({
     });
     
     return active && 'active';
-  },
-  getStreamURL: function(){
-    console.log("getStreamURL");
-    // if(streamurl.length){
-    //   console.log("!!");
-    //   return streamurl;
-    // };
-    var data = StreamURL.findOne();
-    if (data){
-      console.log(data);
-      var streamUrl = data.streamURL.url;
-      streamurl = streamUrl;
-      console.log(streamurl);
-      return streamurl;
-    }
-    //  else {
-    //   return 
-
-    // }
-    
-
-
-
-  },
-  getType: function(){
-    return 'audio/mpeg';
   }
-
 });
-
 
 Template.header.events({
     
     'click .playbutton': function(e) {
-        console.log("playbutton click");
+        // console.log("playbutton click");
+        var src = document.getElementById('audioSource');
+        var prevSrc = src.src;
+        var newSrc = getAudioSrc();
+        src.src = newSrc;
+        // console.log(src);
 
-        var src = document.getElementById('source');
-        console.log(src);
-
-        // if (streamurl.length > 0){
         var audio = document.getElementById('audio');
+
+
+        // FIXME: When first play, "DOMException: The play() request was interrupted by a new load request." error.
+        if (prevSrc != newSrc) audio.load();
         if (audio.muted == true) audio.muted = false;
         if (audio.paused) audio.play(); // audio will load and then play
       // }
@@ -58,7 +33,7 @@ Template.header.events({
     },
 
     'click .pausebutton': function(e) {
-        console.log("pausebutton click");
+        // console.log("pausebutton click");
 
         var audio = document.getElementById('audio');
         audio.muted = true;
@@ -67,6 +42,15 @@ Template.header.events({
 
   
 });
+
+var getAudioSrc = function(){
+  var data = StreamURL.findOne();
+  if (data){
+    var url = data.streamURL.url;
+    // console.log("getAudioSrc(): " + url);
+    return url;
+ } 
+}
 
 
 Template.header.created= function() {
@@ -78,10 +62,6 @@ Template.header.created= function() {
 
 
 Template.header.rendered = function() {
-    // console.log("rendered()");
-    // var data = StreamURL.findOne();
-    // var streamUrl = data.streamURL.url;
-    // streamurl = streamUrl;
 
 };
 
