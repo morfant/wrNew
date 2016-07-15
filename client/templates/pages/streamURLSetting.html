@@ -1,0 +1,15 @@
+<template name="streamURLSetting">
+  <form class="main form">
+
+    <div class="form-group {{errorClass 'streamURL'}}">
+      <label class="control-label" for="streamURL">Stream source URL<span id="submitResult"></span></label>
+      <div class="controls">
+          <input name="streamURL" id="streamURL" type="text" value="" placeholder="ex) http://jjwc.cafe24.com:8000" class="form-control"/>
+          <span class="help-block">{{errorMessage 'streamURL'}}</span>
+
+      </div>
+    </div>
+
+    <input type="submit" value="Submit" class="btn btn-primary"/>
+  </form>
+</template>

@@ -1,10 +1,10 @@
-Template.streamURLSubmit.created = function() {
+Template.streamURLSetting.created = function() {
   Session.set('stremURLSubmitErrors', {});
 
 };
 
 
-Template.streamURLSubmit.helpers({
+Template.streamURLSetting.helpers({
   errorMessage: function(field) {
     return Session.get('stremURLSubmitErrors')[field];
   },
@@ -14,9 +14,14 @@ Template.streamURLSubmit.helpers({
 });
 
 
+getSubmittedURL = function(){
+  var data = StreamURL.findOne();
+  var url = data.streamURL.url;
+  return " : " + url;
+}
 
-Template.streamURLSubmit.events({
-  'submit form': function(e) {
+Template.streamURLSetting.events({
+  'submit form': function(e, template) {
     // console.log("click submit");
     e.preventDefault();
 
@@ -36,6 +41,10 @@ Template.streamURLSubmit.events({
       // display the error to the user and abort
       if (error)
         return throwError(error.reason);
+
+      if (result){
+        template.find('#submitResult').textContent = getSubmittedURL();
+      }
       
       // Router.go('postPage', {_id: result._id});  
     });
@@ -44,7 +53,7 @@ Template.streamURLSubmit.events({
 });
 
 
-Template.streamURLSubmit.rendered= function() {
-
+Template.streamURLSetting.rendered = function() {
+  this.find('#submitResult').textContent = getSubmittedURL();
 };
 
