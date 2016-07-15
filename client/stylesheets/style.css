@@ -13,10 +13,12 @@
 
 body {
   background: #eee;
-  color: #666666; }
+  color: #666666;
+}
 
 .navbar {
-  margin-bottom: 10px; }
+
+  margin-bottom: 20px; }
   /* line 32, ../sass/style.scss */
   .navbar .navbar-inner {
     -webkit-border-radius: 0px 0px 3px 3px;
@@ -181,4 +183,7 @@ body {
     position: relative;
     left: 800px;
     height: 10px;
+}
+.container-fluid{
+    background-color: #ffffff;
 }

@@ -1,6 +1,7 @@
 <template name="header">
   <nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
+    <div class="container-fluid height-full">
+    <!-- <div class="container"> -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
           <span class="sr-only">Toggle navigation</span>
@@ -9,12 +10,23 @@
           <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand" href="{{pathFor 'streamingNotice'}}">Live</a>
+
+        <audio id="audio">
+          <source src="{{getStreamURL}}" type="audio/mpeg" />
+        </audio>
+
+        <!-- <img class="playbutton" src="/images/tri.png" height="70" width="70">   -->
+        <!-- <img class="pausebutton" src="/images/pause.png" height="70" width="70"> -->
+
+        <img class="playbutton" src="/images/big_play.jpg" height="55" width="50">  
+        <img class="pausebutton" src="/images/big_pause.jpg" height="70" width="70">       
+
       </div>
 
-      <div class="collapse navbar-collapse" id="navigation">
 
+      <div class="collapse navbar-collapse" id="navigation">
         <ul class="nav navbar-nav">
+          {{#if currentUser}}<li><a href="{{pathFor 'streamingNotice'}}">Live</a></li>{{/if}}
           {{#if currentUser}}<li><a href="{{pathFor 'postsList'}}">List</a></li>{{/if}}
           {{#if currentUser}}<li><a href="{{pathFor 'postSubmit'}}">Submit</a></li>{{/if}}
         </ul>
