@@ -8,6 +8,9 @@ Template.streamingNotice.created = function() {
 
 
 Template.streamingNotice.helpers({
+  imgExist: function() {
+
+  },
   onNowExist: function() {
     return !$.isEmptyObject(onNowPost);
   },
