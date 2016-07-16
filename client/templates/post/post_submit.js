@@ -4,7 +4,7 @@ Template.postSubmit.created = function() {
   Session.set('postSubmitErrors', {});
 
   randomKey = Random.id();
-  console.log("in postsubmit.created(): " + randomKey);
+  // console.log("in postsubmit.created(): " + randomKey);
 };
 
 
@@ -39,6 +39,7 @@ Template.postSubmit.events({
 
     var post = {
       title: $(e.target).find('[name=title]').val().replace(/[\r\n]/g, "<br />"),
+      notice: $(e.target).find('[name=notice]').val().replace(/[\r\n]/g, "<br />"),
       text: $(e.target).find('[name=text]').val().replace(/[\r\n]/g, "<br />"),
       imgId: randomKey
     };

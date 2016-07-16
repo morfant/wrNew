@@ -27,7 +27,7 @@ Template.bgImgURLSetting.events({
       url: $(e.target).find('[name=bgImgURL]').val()
     };
 
-    console.log(bgImgUrl);
+    // console.log(bgImgUrl);
 
     var errors = validateBgImgUrl(bgImgUrl);
     if (errors.bgImgURL)

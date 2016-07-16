@@ -1,9 +1,27 @@
 Template.header.helpers({
+    getPlaybarNotice: function() {
+        // console.log("getPlaybarNotice()");
+        var postOnNow = Posts.find({isOnNow: true}).count(); //reactive
+        var postUpNext = Posts.find({isUpNext: true}).count(); //reactive
+
+        if (postOnNow){
+            // console.log("isOnNow");
+            var post = Posts.findOne({isOnNow: true});
+            // console.log(post.notice);
+            return post.notice;
+        };
+        if (postUpNext){
+            // console.log("isUpNext");
+            var post = Posts.findOne({isUpNext: true});
+            // console.log(post.notice);
+            return post.notice;
+        };
+    },
     getOnNowExist: function() {
         var ison = Posts.find({isOnNow: true}).count(); //reactive
         // console.log(ison);
       return ison;
-  },
+    },
   activeRouteClass: function(/* route names */) {
     var args = Array.prototype.slice.call(arguments, 0);
     args.pop();

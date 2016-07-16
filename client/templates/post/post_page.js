@@ -1,8 +1,5 @@
-
-
 Template.postPage.created = function(){
-    console.log("postPage")
-    console.log(this)
+    // console.log("postPage")
 }
 
 Template.postPage.helpers({

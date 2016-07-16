@@ -19,6 +19,7 @@ Template.postEdit.events({
 
     var postProperties = {
       title: $(e.target).find('[name=title]').val(),
+      notice: $(e.target).find('[name=notice]').val(),
       text: $(e.target).find('[name=text]').val()
     }
 
