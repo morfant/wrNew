@@ -190,8 +190,6 @@ body {
 }
 .container-fluid{
     background-color: #ffffff;
-    /*background-color:rgba(255,0,0,0.01);*/
-
     opacity: 0.5;
 }
 .footer {
@@ -200,6 +198,7 @@ body {
   height: 80px;
   background-color: #f5f5f5;
 }
+
 #bg {
   z-index: -1;
   position: fixed; 
@@ -220,11 +219,18 @@ body {
 }
 
 
-
+/*full screen background*/
 body#background {
   background: no-repeat 50% 50% fixed; 
   background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   -webkit-background-size: cover;
+}
+
+.noticeTitle{
+  font-size: 25px;
+}
+.noticeContent {
+  font-size: 20px;
 }

@@ -1,7 +1,8 @@
 <template name="header">
   <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid height-full">
-    <!-- <div class="container"> -->
+
+
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
           <span class="sr-only">Toggle navigation</span>
@@ -10,20 +11,13 @@
           <span class="icon-bar"></span>
         </button>
 
-<!-- {{#if getOnNowExist}} -->
-
         <audio id="audio">
           <source id="audioSource" src="" type="audio/mpeg" />
-          <!-- <source id="source" src="http://jjwc.cafe24.com:8000/birdnest.ogg" type="audio/mpeg" /> -->
-          <!-- <source id="source"  type="audio/mpeg" src="http://jjwc.cafe24.com:8000/birdnest.ogg" /> -->
+         
         </audio>
 
-        <!-- <img class="playbutton" src="/images/tri.png" height="70" width="70">   -->
-        <!-- <img class="pausebutton" src="/images/pause.png" height="70" width="70"> -->
-
         <img class="playbutton" src="/images/big_play.jpg" height="55" width="50">  
-        <img class="pausebutton" src="/images/big_pause.jpg" height="70" width="70">       
-<!-- {{/if}} -->
+        <img class="pausebutton" src="/images/big_pause.jpg" height="70" width="70">
       </div>
 
 
@@ -35,16 +29,16 @@
           {{#if currentUser}}<li><a href="{{pathFor 'streamURLSetting'}}">streamSet</a></li>{{/if}}
           {{#if currentUser}}<li><a href="{{pathFor 'bgImgURLSetting'}}">bgImgSet</a></li>{{/if}}
 
-{{#unless getOnNowExist}}
-<li><a href="">Next live 05:00 KST (UTC + 9), 17th July Sunday</a></li>
-{{/unless}}
+          {{#unless getOnNowExist}}
+            <li><a href=""><b>Next live 05:00 KST (UTC + 9), 17th July Sunday</b></a></li>
+          {{/unless}}
         </ul>
 
-        <ul class="nav navbar-nav navbar-right">
-          <!-- {{> loginButtons}} -->
-        </ul>
+         <!-- <ul class="nav navbar-nav navbar-right">{{> loginButtons}}</ul> -->
+
 
       </div>
+
     </div>
   </nav>
 </template>

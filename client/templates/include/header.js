@@ -31,7 +31,7 @@ Template.header.events({
 
         // FIXME: When first play, "DOMException: The play() request was interrupted by a new load request." error.
         if (prevSrc != newSrc) audio.load();
-        if (audio.muted == true) audio.muted = false;
+        // if (audio.muted == true) audio.muted = false;
         if (audio.paused) audio.play(); // audio will load and then play
       // }
         
@@ -41,8 +41,8 @@ Template.header.events({
         // console.log("pausebutton click");
 
         var audio = document.getElementById('audio');
-        audio.muted = true;
-        // audio.pause(); // audio will load and then play
+        // audio.muted = true;
+        audio.pause(); // audio will load and then play
     }
 
   
