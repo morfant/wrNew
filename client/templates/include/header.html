@@ -12,8 +12,10 @@
         </button>
 
         <audio id="audio">
+          <!-- get stream source url from db reactively -->
+          {{getStreamSrc}} 
           <source id="audioSource" src="" type="audio/mpeg" />
-         
+          <!-- <source id="audioSource" src="http://jjwc.cafe24.com:8000/puredata" type="audio/mpeg" /> -->
         </audio>
 
         <!-- a tag is fake to make finger pointer -->
@@ -41,7 +43,6 @@
 
 
       </div>
-
     </div>
   </nav>
 </template>

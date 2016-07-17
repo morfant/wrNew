@@ -46,7 +46,7 @@ Template.streamURLSetting.events({
         template.find('#submitResult').textContent = getSubmittedURL();
       }
       
-      // Router.go('postPage', {_id: result._id});  
+      Router.go('streamingNotice');  
     });
 
   }

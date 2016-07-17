@@ -17,74 +17,99 @@ Template.header.helpers({
             return post.notice;
         };
     },
+    getStreamSrc: function() {
+        var data = StreamURL.find({}); //reactive
+        var dataExist = data.count();
+        // console.log(dataExist);
+        if (dataExist) {
+            var url = data.fetch()[0].streamURL.url;
+            // console.log(url);
+            var src = document.getElementById('audioSource');
+            src.src = url;
+
+            // preload
+            audio.load();
+            document.getElementById('audio').paused = true;
+            document.getElementById('audio').muted = false;
+
+        }
+    },
     getOnNowExist: function() {
         var ison = Posts.find({isOnNow: true}).count(); //reactive
         // console.log(ison);
-      return ison;
+        return ison;
     },
-  activeRouteClass: function(/* route names */) {
-    var args = Array.prototype.slice.call(arguments, 0);
-    args.pop();
+    activeRouteClass: function(/* route names */) {
+        var args = Array.prototype.slice.call(arguments, 0);
+        args.pop();
     
-    var active = _.any(args, function(name) {
-      return Router.current() && Router.current().route.getName() === name
+        var active = _.any(args, function(name) {
+            return Router.current() && Router.current().route.getName() === name
     });
     
-    return active && 'active';
-  }
+        return active && 'active';
+    }
 });
 
 Template.header.events({
-    
     'click .playbutton': function(e) {
         // console.log("playbutton click");
-        var src = document.getElementById('audioSource');
-        var prevSrc = src.src;
-        var newSrc = getAudioSrc();
-        src.src = newSrc;
-        // console.log(src);
-
         var audio = document.getElementById('audio');
 
+        if (audio.muted){
+            audio.muted = false;
+            return;
+        }
 
-        // FIXME: When first play, "DOMException: The play() request was interrupted by a new load request." error.
-        if (prevSrc != newSrc) audio.load();
-        // if (audio.muted == true) audio.muted = false;
-        if (audio.paused) audio.play(); // audio will load and then play
-      // }
-        
+        if (audio.paused) audio.play();
+
     },
-
     'click .pausebutton': function(e) {
         // console.log("pausebutton click");
-
         var audio = document.getElementById('audio');
-        // audio.muted = true;
-        audio.pause(); // audio will load and then play
+        audio.muted = true;
     }
 
   
 });
 
-var getAudioSrc = function(){
-  var data = StreamURL.findOne();
-  if (data){
-    var url = data.streamURL.url;
-    // console.log("getAudioSrc(): " + url);
-    return url;
- } 
-}
 
+Template.header.created = function() {
 
-Template.header.created= function() {
-
-    // var strURL = StreamURL.find().fetch();
-    // console.log(strURL);
-    // return strURL;
 };
 
 
 Template.header.rendered = function() {
 
+    // $('#control_1').on('input change', function(){
+    //      // console.log(this.value);
+    //     var audio = document.getElementById('audio');
+    //     audio.volume = this.value;
+    // });
+
+    // $('#control_2').on('input change', function(){
+    //      // console.log(this.value);
+    //     var audio = document.getElementById('audio2');
+    //     audio.volume = this.value;
+    // });
+
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
