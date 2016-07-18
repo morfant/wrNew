@@ -1,6 +1,4 @@
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
-@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300);
 
 .grid-block, .main, .post, .comments li, .comment-form {
   background: #fff;
@@ -194,7 +192,7 @@ body {
     height: 10px;
 }
 .articles{
-  font-family: 'Nanum Gothic', serif;
+  font-family: 'Open Sans', sans-serif;
   color: #ffffff;
 }
 .container-fluid{
