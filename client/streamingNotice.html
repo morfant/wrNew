@@ -16,17 +16,33 @@
     </div>
   {{/if}}
 
-    <br><br><br><br>
+<!--     <br><br><br><br> -->
 
   {{#if upNextExist}}
     <div class="upNext">
       <article class="streamList">  
-        <h3>Next</h3>
+        <h3><b>Next</b></h3>
           <p class="noticeTitle">{{{upNextTitle}}}</p>
           <p class="noticeContent">{{{upNextText}}}</p>
           <!-- <img src="/articlePic/upNext.png" height="300" width="600"> -->
 
       </article>
+    </div>
+  {{/if}}
+
+
+
+  {{#if lastEpExist}}
+    <div class="lastEps">
+      <h3><b>LastEps</b></h3>
+
+      {{#each lastEps}}
+      <article class="streamList">  
+        <p class="noticeTitle">{{{title}}}</p>
+        <p class="noticeContent">{{{text}}}</p>
+      </article>
+      {{/each}}
+
     </div>
   {{/if}}
 

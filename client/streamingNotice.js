@@ -1,25 +1,32 @@
 var onNowPost = {};
 var upNextPost = {};
+var lastEpPost = {};
 // isOnNowExist = false;
 
 
 Template.streamingNotice.created = function() {
   onNowPost = Posts.findOne({isOnNow: true});
   upNextPost = Posts.findOne({isUpNext: true});
+  lastEpPost = Posts.findOne({isLastEp: true});
 }
 
 
 Template.streamingNotice.helpers({
+  lastEps: function() {
+    return Posts.find({isLastEp: true}, {sort: {submitted: -1}});
+  },
   imgExist: function() {
 
   },
   onNowExist: function() {
     isOnNowExist = !$.isEmptyObject(onNowPost);
-    // console.log(isOnNowExist);
     return isOnNowExist;
   },
   upNextExist: function() {
     return !$.isEmptyObject(upNextPost);
+  },
+  lastEpExist: function() {
+    return !$.isEmptyObject(lastEpPost);
   },
   onNowTitle: function() {
     return onNowPost.title;
@@ -44,6 +51,7 @@ Template.streamingNotice.events({
 Template.streamingNotice.rendered = function() {
   onNowPost = Posts.findOne({isOnNow: true});
   upNextPost = Posts.findOne({isUpNext: true});
+  lastEpPost = Posts.findOne({isLastEp: true});
   // console.log(onNowPost);
   // console.log(upNextPost);
 }

@@ -31,7 +31,6 @@ Template.header.helpers({
             audio.load();
             document.getElementById('audio').paused = true;
             document.getElementById('audio').muted = false;
-
         }
     },
     getOnNowExist: function() {
