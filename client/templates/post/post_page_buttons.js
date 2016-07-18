@@ -1,55 +1,52 @@
+var onNow_IsChecked, upNext_IsChecked, lastEp_IsChecked;
+
 Template.postButtons.created = function(){
-    // console.log(this.data.isOnNow);
+    
+
 
 };
 
+
 Template.postButtons.events({
-    'click .categoryButtons': function(e, template){
+    // 'click .categoryButtons': function(e, template){
+    'click .checkBoxes' : function(e, template){
         e.preventDefault();
 
-        var btnVal = $(e.target).attr("value");
+        // check wath btn(check box) clicked
+        var whatBtn = $(e.target).attr("name");
 
-        var onNow_IsChecked = template.find('#onNow').checked;
-        var upNext_IsChecked = template.find('#upNext').checked;
-        var lastEp_IsChecked = template.find('#lastEp').checked;
-
-        var onNow_setVal = false;
-        var upNext_setVal = false;
-        var lastEp_setVal = false;
-
+        // will set these value
         var setVal = {
             onNow: false,
             upNext: false,
             lastEp: false
         };
 
-        if (onNow_IsChecked) setVal.onNow = false;
-        else setVal.onNow = true;
+        setVal.onNow = !onNow_IsChecked;
+        setVal.upNext = !upNext_IsChecked;
+        setVal.lastEp = !lastEp_IsChecked;
 
-        if (upNext_IsChecked) setVal.upNext = false;
-        else setVal.upNext = true;
-
-        if (lastEp_IsChecked) setVal.lastEp = false;
-        else setVal.lastEp = true;
-
-        // console.log(btnVal + ": " + setVal[btnVal]);
-
-        Meteor.call('updatePostStatus', this._id, btnVal, setVal[btnVal],
+        Meteor.call('updatePostStatus', this._id, whatBtn, setVal[whatBtn],
             function(error, result){ //callback of Meteor.call()
-                // console.log("result: " + result);
                 if (result) {
-                  if (btnVal == "onNow"){
-                    template.find('#onNow').checked = setVal[btnVal];
-                    template.find('#upNext').checked = false;
-                    template.find('#lastEp').checked = false;
-                  } else if (btnVal == "upNext") {
-                    template.find('#onNow').checked = false;
-                    template.find('#upNext').checked = setVal[btnVal];
-                    template.find('#lastEp').checked = false;
-                  } else if (btnVal == "lastEp") {
-                    template.find('#onNow').checked = false;
-                    template.find('#upNext').checked = false;
-                    template.find('#lastEp').checked = setVal[btnVal];
+                  if (whatBtn == "onNow"){
+                    // console.log("onNow callback");
+                    onNow_IsChecked = template.find('#onNow').checked = setVal[whatBtn];
+                    // onNow_IsChecked = template.find('#onNow').checked = !onNow_IsChecked;
+                    upNext_IsChecked = template.find('#upNext').checked = false;
+                    lastEp_IsChecked = template.find('#lastEp').checked = false;
+                  } else if (whatBtn == "upNext") {
+                    // console.log("upNext callback");
+                    onNow_IsChecked = template.find('#onNow').checked = false;
+                    upNext_IsChecked = template.find('#upNext').checked = setVal[whatBtn];
+                    // upNext_IsChecked = template.find('#upNext').checked = !upNext_IsChecked;
+                    lastEp_IsChecked = template.find('#lastEp').checked = false;
+                  } else if (whatBtn == "lastEp") {
+                    // console.log("lastEp callback");
+                    onNow_IsChecked = template.find('#onNow').checked = false;
+                    upNext_IsChecked = template.find('#upNext').checked = false;
+                    lastEp_IsChecked = template.find('#lastEp').checked = setVal[whatBtn];
+                    // lastEp_IsChecked = template.find('#lastEp').checked = !lastEp_IsChecked;
                   }
                 }
               });
@@ -65,9 +62,9 @@ Template.postButtons.events({
 Template.postButtons.rendered = function(){
     // console.log(this.data.isOnNow);
 
-    this.find('#onNow').checked = this.data.isOnNow;
-    this.find('#upNext').checked = this.data.isUpNext;
-    this.find('#lastEp').checked = this.data.isLastEp;
+    onNow_IsChecked = this.find('#onNow').checked = this.data.isOnNow;
+    upNext_IsChecked = this.find('#upNext').checked = this.data.isUpNext;
+    lastEp_IsChecked = this.find('#lastEp').checked = this.data.isLastEp;
 
 };
 
