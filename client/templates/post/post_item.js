@@ -63,6 +63,7 @@ Template.postItem.events({
         console.log("mailing button clicked");
 
         var subject = this.title;
+        var text = this.text;
         Meteor.call('createCampaign', subject, function (error, result) {
           if (error) { 
             Session.set('sendingResult', {error: error});
@@ -72,7 +73,7 @@ Template.postItem.events({
             // console.log(campaignId);
             Session.set('sendingResult', campaignId);
 
-            Meteor.call ('editContent', campaignId, function(error, result) {
+            Meteor.call ('editContent', campaignId, text, function(error, result) {
               if (error) {
                 Session.set('sendingResult', {error: error});
               }else{
