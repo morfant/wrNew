@@ -62,35 +62,35 @@ Template.postItem.events({
         e.preventDefault();
         console.log("mailing button clicked");
 
-        // Meteor.call('getCampaign', function (error, result) {
-        //   if (error) { 
-        //     Session.set('sendingResult', {error: error});
-        //   } else {
-        //     // console.log(result);
-        //     console.log(result.campaigns);
-        //     console.log(result.campaigns[0].id);
-        //     Session.set('sendingResult', result);
-
-        //     return result;
-        //   }
-        // });
-
         var subject = this.title;
-        console.log(subject);
-        Meteor.call('sendMail', subject, function (error, result) {
+        Meteor.call('createCampaign', subject, function (error, result) {
           if (error) { 
             Session.set('sendingResult', {error: error});
           } else {
-            if (result) {
-              console.log(result);
-              Session.set('sendingResult', result);
+            // console.log(result);
+            var campaignId = result.id;
+            // console.log(campaignId);
+            Session.set('sendingResult', campaignId);
 
-              return result;
-            }
+            Meteor.call ('editContent', campaignId, function(error, result) {
+              if (error) {
+                Session.set('sendingResult', {error: error});
+              }else{
+                console.log(result);
+                Session.set('sendingResult', result);
+
+                // console.log("campaignId: " + campaignId);
+                Meteor.call('sendMail', campaignId, function(error, result){
+                  if (error) {
+                    Session.set('sendingResult', error);
+                  } else {
+                    Session.set('sendingResult', result);
+                  }
+                })
+              }
+            }) 
           }
         });
-
-
     }
 });
 
