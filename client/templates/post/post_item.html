@@ -8,46 +8,35 @@
       submitted by {{author}} {{#if ownPost}}<a href="{{pathFor 'postEdit'}}">Edit</a>{{/if}}
       </span>
 
-<!-- 
-        <div class="checkBoxes">
-          <input type="checkbox" disabled="disabled" id="onNow" unchecked> onNow
-          <input type="checkbox" disabled="disabled" id="upNext" unchecked> upNext
-          <input type="checkbox" disabled="disabled" id="lastEp" unchecked> lastEp
-        </div>
 
-        <div class="categoryButton">
-            <input id="onNowBut" name="onNow" type="button" value="onNow"/>
-            <input id="upNext" name="upNext" type="button" value="upNext"/>
-            <input id="lastEp" name="lastEp" type="button" value="lastEp"/>
-        </div>
-
- -->
-
-<!--         <div class="toggleButton">
-          <span>onNow</span> <span>upNext</span> <span>lastEp</span>
-        </div>
-
-        <br>
-
-        <div> {{>toggles postId}} </div>
-
- --><!-- <div contentEditable="true">Type here. You can insert images too
-  <img src="http://t2.gstatic.com/images?q=tbn:ANd9GcQCze-mfukcuvzKk7Ilj2zQ0CS6PbOkq7ZhRInnNd1Yz3TQzU4e&t=1" />
-</div>
- -->  
       <br><br>
 
       <div name="text" cols="100" rows="10" style="resize:none" readonly="readonly" class="post-content">
+
       <!-- triple {{{}}} means reading as HTML tag -->
       {{{text}}}
       </div>
-
-
-      <!-- <img src="/images/7monat.JPG" height="300" width="600"> -->
-
- 
-
     </div>
-    <a href="{{pathFor 'postPage'}}" class="discuss btn btn-default">Discuss</a>
+
+    {{#if isInPostsList}}
+      <a href="{{pathFor 'postPage'}}" class="discuss btn btn-default">Discuss</a>
+    {{/if}}
+
+    {{#if isInPost}}
+      <input class="discuss btn btn-warning btn-sm text-right" id="mailing" type="button" value="Send as mailing"/>
+    {{/if}}
+
+
+
+    {{#with sendingResult}}
+      {{#if error}}
+        <p>There was an error: {{error.errorType}} {{error.message}}!</p>
+      {{else}}
+        <p>The date of sent: {{sendingResult}} </p>
+      {{/if}} 
+    {{/with}}
+
+
+
   </div>
 </template>

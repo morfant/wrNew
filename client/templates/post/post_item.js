@@ -2,14 +2,14 @@ var POST_HEIGHT = 80;
 var Positions = new Meteor.Collection(null); // null means local collection
 
 Template.postItem.helpers({
-  getText: function() {
-    console.log(this.text.constructor);
-    var t = '<li>text</li><br><br>78783279797954';
-    console.log(t.constructor);
-    return t
-    // return this.text;
-
+  isInPostsList: function() {
+    if (Router.current().route.getName() == 'postsList') return true;
+    else return false;
   },
+  isInPost: function() {
+    if (Router.current().route.getName() == 'postPage') return true;
+    else return false;
+  },  
   postId: function() {
     return this._id;
   },
@@ -46,12 +46,35 @@ Template.postItem.helpers({
       Positions.upsert({postId: post._id}, {$set: {position: newPosition}})
     });
     return attributes;
+  },
+  sendingResult: function () {
+    return Session.get('sendingResult');
   }
 });
 
 Template.postItem.events({
-    'click .upvotable': function(e) {
+    'click #mailing': function(e) {
         e.preventDefault();
-        Meteor.call('upvote', this._id);
+        console.log("mailing button clicked");
+
+        // Meteor.call('sendMail', function (error, result) {
+        Meteor.call('getCampaign', function (error, result) {
+          if (error) { 
+            Session.set('sendingResult', {error: error});
+          } else {
+            // console.log(result);
+            console.log(result.campaigns);
+            console.log(result.campaigns[0].id);
+            Session.set('sendingResult', result);
+            return result;
+          }
+      });
     }
 });
+
+
+
+
+
+
+

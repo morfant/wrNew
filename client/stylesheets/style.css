@@ -176,9 +176,9 @@ body {
     height: 100px;
 }
 .checkBoxes{
-    position: relative;
+    /*position: relative;*/
     /*left: 800px;*/
-    left: 0px;
+    /*left: 0px;*/
     height: 20px;
 }
 /*.categoryButtons{
@@ -223,4 +223,8 @@ body#background {
 }
 .noticeContent {
   font-size: 16px;
+}
+.sendbtn{
+  /*position: relative;*/
+  right: 100px;
 }
