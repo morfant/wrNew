@@ -27,12 +27,13 @@
     {{/if}}
 
 
+    <br><br><br><br>
 
     {{#with sendingResult}}
       {{#if error}}
         <p>There was an error: {{error.errorType}} {{error.message}}!</p>
-      {{else}}
-        <p>The date of sent: {{sendingResult}} </p>
+        {{else}}
+        <p>Resutl of sening: {{sendingResult}} </p>
       {{/if}} 
     {{/with}}
 

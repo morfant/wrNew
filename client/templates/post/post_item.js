@@ -1,3 +1,8 @@
+Template.postItem.created = function(){
+  Session.set('sendingResult', {});
+
+}
+
 var POST_HEIGHT = 80;
 var Positions = new Meteor.Collection(null); // null means local collection
 
@@ -57,18 +62,35 @@ Template.postItem.events({
         e.preventDefault();
         console.log("mailing button clicked");
 
-        // Meteor.call('sendMail', function (error, result) {
-        Meteor.call('getCampaign', function (error, result) {
+        // Meteor.call('getCampaign', function (error, result) {
+        //   if (error) { 
+        //     Session.set('sendingResult', {error: error});
+        //   } else {
+        //     // console.log(result);
+        //     console.log(result.campaigns);
+        //     console.log(result.campaigns[0].id);
+        //     Session.set('sendingResult', result);
+
+        //     return result;
+        //   }
+        // });
+
+        var subject = this.title;
+        console.log(subject);
+        Meteor.call('sendMail', subject, function (error, result) {
           if (error) { 
             Session.set('sendingResult', {error: error});
           } else {
-            // console.log(result);
-            console.log(result.campaigns);
-            console.log(result.campaigns[0].id);
-            Session.set('sendingResult', result);
-            return result;
+            if (result) {
+              console.log(result);
+              Session.set('sendingResult', result);
+
+              return result;
+            }
           }
-      });
+        });
+
+
     }
 });
 
