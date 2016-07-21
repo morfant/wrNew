@@ -1,0 +1,19 @@
+<template name="shareButtons">
+  
+  <div class="shareButtonsDiv pull-right">
+
+    <!-- Tweet button -->
+    <a class="btn btn-info" href="{{twitterRequest}}"
+    onclick="javascript:window.open(this.href,'', '{{commonProperty}}');return false;">Tweet</a>
+
+    <!-- Facebook button -->
+    <a class="btn btn-primary" href="{{facebookRequest}}"
+    onclick="javascript:window.open(this.href,'', '{{commonProperty}}');return false;">FBshare</a>    
+
+    <!-- Google+ button -->
+    <a class="btn btn-danger" href="{{googlePlusRequest}}"
+    onclick="javascript:window.open(this.href,'', '{{commonProperty}}');return false;">google+</a>
+
+  </div>
+
+</template>

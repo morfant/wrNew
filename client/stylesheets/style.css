@@ -207,8 +207,6 @@ body {
   /*background-color: #f5f5f5;*/
   background: rgba(245, 245, 245, 0.6);
 }
-
-
 body#background {
   background: no-repeat 50% 50% fixed; 
   background-size: cover;
@@ -216,8 +214,6 @@ body#background {
   -o-background-size: cover;
   -webkit-background-size: cover;
 }
-
-
 .noticeTitle{
   font-size: 25px;
 }
