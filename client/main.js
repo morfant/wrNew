@@ -3,11 +3,6 @@ Template.body.created = function(){
 }
 
 Template.body.helpers({
-  facebookInit: function() {
-
-  },
-
-
   getBgImgURL: function() {
     // console.log("getBgImgURL()");
 
@@ -28,7 +23,7 @@ Template.body.helpers({
 
 
     }
-}
+  }
 });
 
 
