@@ -1,0 +1,78 @@
+<html>
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>weather report</title>
+    <link rel="canonical" href="http://weatherreport.kr">
+    <meta name="title" content="weather report">
+    <meta name="referrer" content="always">
+    <meta name="description"
+          content="Artist run internet radio.">
+    <meta property="og:site_name" content="weather report">
+    <meta property="og:type" content="website">        
+    <meta property="og:title" content="weather report">
+    <meta property="og:url" content="http://weatherreport.kr">
+    <meta property="og:image" content="preview_fb_small.png">
+    <meta property="fb:app_id" content="1041541679255318">
+    <meta property="og:description"
+          content="Artist run internet radio.">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="weather report">
+    <meta name="twitter:description" content="Artist run internet radio.">
+    <meta name="twitter:image" content="preview_twitter.png">
+    <meta name="twitter:domain" content="http://weatherreport.kr">
+  </head>
+
+  <body>
+
+
+    {{#if onNowExist}}
+
+      <div class="onNow">
+        <article class="streamList">
+          <h3>Now</h3>
+            <p class="noticeTitle">{{{onNowTitle}}}</p>
+            <p class="noticeContent">{{{onNowText}}}</p>
+            <!-- <img src="/articlePic/onNow.png" height="300" width="600"> -->
+            <!-- <img src="https://drive.google.com/uc?export=view&id=0B5O0D-88dhuVZ19adXg3LWV3cWM" height="300" width="600"> -->
+            
+
+        </article>
+      </div>
+    {{/if}}
+
+  <!--     <br><br><br><br> -->
+
+    {{#if upNextExist}}
+      <div class="upNext">
+        <article class="streamList">  
+          <h3><b>Next</b></h3>
+            <p class="noticeTitle">{{{upNextTitle}}}</p>
+            <p class="noticeContent">{{{upNextText}}}</p>
+            <!-- <img src="/articlePic/upNext.png" height="300" width="600"> -->
+
+        </article>
+      </div>
+    {{/if}}
+
+
+
+    {{#if lastEpExist}}
+      <div class="lastEps">
+        <h3><b>LastEps</b></h3>
+
+        {{#each lastEps}}
+        <article class="streamList">  
+          <p class="noticeTitle">{{{title}}}</p>
+          <p class="noticeContent">{{{text}}}</p>
+        </article>
+        {{/each}}
+
+      </div>
+    {{/if}}
+  
+  </body>
+
+</html>

@@ -19,14 +19,14 @@ Template.streamingNotice.helpers({
 
   },
   onNowExist: function() {
-    isOnNowExist = !$.isEmptyObject(onNowPost);
+    isOnNowExist = !_.isEmpty(onNowPost);
     return isOnNowExist;
   },
   upNextExist: function() {
-    return !$.isEmptyObject(upNextPost);
+    return !_.isEmpty(upNextPost);
   },
   lastEpExist: function() {
-    return !$.isEmptyObject(lastEpPost);
+    return !_.isEmpty(lastEpPost);
   },
   onNowTitle: function() {
     return onNowPost.title;
