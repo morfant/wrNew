@@ -30,7 +30,7 @@ Template.header.helpers({
             // preload
             audio.load();
             document.getElementById('audio').paused = true;
-            document.getElementById('audio').muted = false;
+            // document.getElementById('audio').muted = false;
         }
     },
     getOnNowExist: function() {
@@ -55,18 +55,14 @@ Template.header.events({
         // console.log("playbutton click");
         var audio = document.getElementById('audio');
 
-        if (audio.muted){
-            audio.muted = false;
-            return;
-        }
-
         if (audio.paused) audio.play();
 
     },
     'click .pausebutton': function(e) {
         // console.log("pausebutton click");
         var audio = document.getElementById('audio');
-        audio.muted = true;
+
+        if (!audio.paused) audio.pause();
     }
 
   
