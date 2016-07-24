@@ -57,35 +57,60 @@ Template.postItem.helpers({
   }
 });
 
+
+resetButtonValue = function(target, str, delay) {
+  Meteor.setTimeout(
+    function(){
+      target.value = str;
+      target.disabled = false;
+    }, delay);
+}
+
 Template.postItem.events({
     'click #mailing': function(e) {
         e.preventDefault();
         console.log("mailing button clicked");
 
+        var originalValue = e.target.value;
+        e.target.disabled = true;
+        e.target.value = "sending...";
+
         var subject = this.title;
         var text = this.text;
+
         Meteor.call('createCampaign', subject, function (error, result) {
           if (error) { 
             Session.set('sendingResult', {error: error});
+            e.target.value = "createCampaign Failed.";
+            resetButtonValue(e.target, originalValue, 1000);
           } else {
             // console.log(result);
             var campaignId = result.id;
             // console.log(campaignId);
             Session.set('sendingResult', campaignId);
+            e.target.value = "createCampaign succeed..";
 
             Meteor.call ('editContent', campaignId, text, function(error, result) {
               if (error) {
                 Session.set('sendingResult', {error: error});
+                e.target.value = "editContent Failed.";
+                resetButtonValue(e.target, originalValue, 1000);
               }else{
-                console.log(result);
+                // console.log(result);
                 Session.set('sendingResult', result);
+                e.target.value = "editContent succeed..";
 
                 // console.log("campaignId: " + campaignId);
                 Meteor.call('sendMail', campaignId, function(error, result){
                   if (error) {
                     Session.set('sendingResult', error);
+                    e.target.value = "sending Failed.";
+                    resetButtonValue(e.target, originalValue, 1000);
                   } else {
                     Session.set('sendingResult', result);
+                    e.target.value = "Sending succeed!!";
+                    resetButtonValue(e.target, originalValue, 1000);
+
                   }
                 })
               }
@@ -93,6 +118,7 @@ Template.postItem.events({
           }
         });
     }
+
 });
 
 
