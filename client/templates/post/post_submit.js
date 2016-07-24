@@ -37,10 +37,13 @@ Template.postSubmit.events({
   'submit form': function(e) {
     e.preventDefault();
 
+    console.log($(e.target).find('#text').html());
+
     var post = {
       title: $(e.target).find('[name=title]').val().replace(/[\r\n]/g, "<br />"),
       notice: $(e.target).find('[name=notice]').val().replace(/[\r\n]/g, "<br />"),
-      text: $(e.target).find('[name=text]').val().replace(/[\r\n]/g, "<br />"),
+      // text: $(e.target).find('[name=text]').val().replace(/[\r\n]/g, "<br />"),
+      text: $(e.target).find('[name=text]').html(),
       imgId: randomKey
     };
 
