@@ -2,20 +2,31 @@
   <form class="main form">
 
     <div class="form-group">
-      <label class="control-label" for="bgImgURL">Record status</label>
+      <label class="control-label" for="">Record status : {{getRecStatus}} 
+
+     <!--    <span>
+          {{#if getRecStatus}} <span>recording...</span>
+          {{else}} <span>stopped</span>
+          {{/if}}
+        </span> -->
+
+      </label>
+
+      <br /><br />
+
       <div class="controls">
-
-
-
-        <div class="recStatus"></div>
 
             <a class="btn btn-danger recStart" href="#">Record</a>
             <a class="btn btn-primary recStop" href="#">Stop</a>
-
             <br /><br />
 
-            <input name="script" id="script" type="text" placeholder="command here.." class="form-control"/>
+            <input name="script" id="script" type="text" placeholder="linux command ex) ls, ps.." class="form-control"/>
+            <br />
             <a class="btn btn-info runCommand" href="#">run command</a>
+
+            <br /><br /><br /><br />
+            <div class="commandReturn"></div>
+            <br /><br /><br /><br />
 
 
       </div>
