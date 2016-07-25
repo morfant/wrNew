@@ -1,5 +1,5 @@
 var userAgentRegExps = [
-    /^facebookexternalhit/i, /^linkedinbot/i, /^twitterbot/i];
+    /^facebookexternalhit/i, /^linkedinbot/i, /^twitterbot/i, /^Facebot/i];
 
 WebApp.connectHandlers.use(function (req, res, next) {
     if (/\?.*_escaped_fragment_=/.test(req.url) ||
