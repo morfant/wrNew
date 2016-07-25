@@ -1,6 +1,8 @@
 Template.postItem.created = function(){
   Session.set('sendingResult', {});
 
+  console.log(this.text);
+
 }
 
 var POST_HEIGHT = 80;
@@ -77,6 +79,7 @@ Template.postItem.events({
 
         var subject = this.title;
         var text = this.text;
+        console.log(text);
 
         Meteor.call('createCampaign', subject, function (error, result) {
           if (error) { 
