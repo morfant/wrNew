@@ -1,20 +1,37 @@
 <head>
 
   <meta name="fragment" content="!">
-  <meta name="google-site-verification" content="X9t_dV4VTxFLRLRAC66p_o0zlI8ccml5guPyuHBwGAM" /> 
+  <meta name="google-site-verification" content="X9t_dV4VTxFLRLRAC66p_o0zlI8ccml5guPyuHBwGAM" /> <!-- jjwc --> 
+  <meta name="google-site-verification" content="n7VfNUV2wIJsqqEWzPPOucVoC7vTAAqYENThiA1A-eM" /> <!-- weatherreport --> 
   <meta name="naver-site-verification" content="f922d514337f09748918df1835dfa486ad7f8c16"/>
   <meta name="description" content="Artist run internet radio.">
 
+  <!-- Google crawler read this? -->
+<!--   <meta property="og:site_name" content="weather report">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="weather report">
+  <meta property="og:url" content="http://weatherreport.kr/">
+  <meta property="og:image" content="http://weatherreport.kr/preview_gp.png"> -->
+  
 
   <link rel='icon' href='/favicon.ico'>
   <title>weatherReport</title> 
+
+
+<!-- Update your html tag to include the itemscope and itemtype attributes. -->
+<html itemscope itemtype="http://schema.org/Event">
+
+<!-- Add the following three tags inside head. -->
+<meta itemprop="name" content="weather report">
+<!-- <meta itemprop="description" content="Artist run internet radio."> -->
+<meta itemprop="image" content="http://weatherreport.kr/preview_gp.png">
 
 
 </head>
 
 
 <!-- <body id="background" style="background-image:url('bg.png')"> -->
-<body id="background" style="background-image:url('bg.png')">
+<body id="background" style="background-image:url('bg.png')" >
 
   <!-- FACEBOOK API INIT -->
   <div id="fb-root"></div>
@@ -26,7 +43,7 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
 
-
+  {{getArticle}}
   {{> shareButtons}}
 
   <!-- get current background image url from server -->

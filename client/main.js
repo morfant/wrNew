@@ -1,16 +1,7 @@
-// var metaInfo = {name: "description", content: "Artist run internet radio."};
-// DocHead.addMeta(metaInfo);
-
-// var metaInfo = {property: "og:image", content: "thumbNail.png"};
-// DocHead.addMeta(metaInfo);
-
-// var metaInfo = {name: "twitter:image", content: "thumbNail.png"};
-// DocHead.addMeta(metaInfo);
-
-
-Template.body.created = function(){
-
+Template.body.created = function() {
+  
 }
+
 
 Template.body.helpers({
   getBgImgURL: function() {
