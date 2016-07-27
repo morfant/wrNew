@@ -38,8 +38,10 @@ Template.bgImgURLSetting.events({
       if (error)
         return throwError(error.reason);
       if (result){
+        console.log(result);
 
-        template.find('#submitResult').textContent = getSubmittedURL_BG();
+        
+        template.find('#submitResultBG').textContent = getSubmittedURL_BG();
       }
       
       // Router.go('postPage', {_id: result._id});  
@@ -50,6 +52,6 @@ Template.bgImgURLSetting.events({
 
 
 Template.bgImgURLSetting.rendered = function() {
-  this.find('#submitResult').textContent = getSubmittedURL_BG();
+  this.find('#submitResultBG').textContent = getSubmittedURL_BG();
 };
 

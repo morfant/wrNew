@@ -215,3 +215,21 @@ body#background {
 .noticeContent {
   font-size: 16px;
 }
+.desktop-progress {
+
+}
+.start-time {
+  display: inline-block;
+  /*vertical-align: middle;*/
+}
+.end-time {
+  display: inline-block;
+  /*vertical-align: middle;*/
+}
+progress {
+  display: inline-block;
+  width: 300px;
+  height: 3px;
+  /*position:relative;*/
+  vertical-align: 0.4em;
+}

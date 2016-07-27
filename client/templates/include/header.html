@@ -29,9 +29,12 @@
           {{#if currentUser}}<li><a href="{{pathFor 'streamingNotice'}}">Live</a></li>{{/if}}
           {{#if currentUser}}<li><a href="{{pathFor 'postsList'}}">List</a></li>{{/if}}
           {{#if currentUser}}<li><a href="{{pathFor 'postSubmit'}}">Submit</a></li>{{/if}}
-          {{#if currentUser}}<li><a href="{{pathFor 'streamURLSetting'}}">streamSet</a></li>{{/if}}
+
+          {{#if currentUser}}<li><a href="{{pathFor 'settings'}}">Setting</a></li>{{/if}}
+
+         <!--  {{#if currentUser}}<li><a href="{{pathFor 'streamURLSetting'}}">streamSet</a></li>{{/if}}
           {{#if currentUser}}<li><a href="{{pathFor 'bgImgURLSetting'}}">bgImgSet</a></li>{{/if}}
-          {{#if currentUser}}<li><a href="{{pathFor 'recScript'}}">recOnServer</a></li>{{/if}}
+          {{#if currentUser}}<li><a href="{{pathFor 'recScript'}}">recOnServer</a></li>{{/if}} -->
 
           <!-- {{#unless getOnNowExist}} -->
           <li><a class="playbutton" href=""><b>
@@ -41,18 +44,20 @@
 
           <!-- progress bar -->
           <!-- {{#if getStreamingReady}} -->
-          <li><a href="">
+           <li><a href="">
             <div class="desktop-progress">
-              <span class="start-time">05:00</span>
+              <div class="start-time">05:00</div>
               <progress value="0" max="100"></progress>
-              <span class="end-time">07:00</span>
+              <div class="end-time">07:00</div>
             </div>
+
             </a>
           </li>
           <!-- {{/if}} -->
 
         </ul>
 
+ 
          <!-- <ul class="nav navbar-nav navbar-right">{{> loginButtons}}</ul> -->
 
 
