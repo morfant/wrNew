@@ -34,10 +34,23 @@
           {{#if currentUser}}<li><a href="{{pathFor 'recScript'}}">recOnServer</a></li>{{/if}}
 
           <!-- {{#unless getOnNowExist}} -->
-            <li><a class="playbutton" href=""><b>
-              {{{getPlaybarNotice}}}
-            </b></a></li>
+          <li><a class="playbutton" href=""><b>
+            {{{getPlaybarNotice}}}
+          </b></a></li>
           <!-- {{/unless}} -->
+
+          <!-- progress bar -->
+          <!-- {{#if getStreamingReady}} -->
+          <li><a href="">
+            <div class="desktop-progress">
+              <span class="start-time">05:00</span>
+              <progress value="0" max="100"></progress>
+              <span class="end-time">07:00</span>
+            </div>
+            </a>
+          </li>
+          <!-- {{/if}} -->
+
         </ul>
 
          <!-- <ul class="nav navbar-nav navbar-right">{{> loginButtons}}</ul> -->

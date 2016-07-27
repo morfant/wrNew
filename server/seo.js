@@ -15,33 +15,23 @@ WebApp.connectHandlers.use(function (req, res, next) {
             var isUpNextExist = !_.isEmpty(upNextPost);
             var isLastEpExist = !_.isEmpty(lastEpPost);
 
-
-  if (isOnNowExist) {
-    // Session.set("postExist", {onNow: true});
-    console.log(onNowPost.text);
-    var metaInfo = {name: "itemprop", content: onNowPost.text};
-    DocHead.addMeta(metaInfo);
-    metaInfo = {property: "og:description", content: onNowPost.text};
-    DocHead.addMeta(metaInfo);
-    
-
-
-  } else if (isUpNextExist) {
-    console.log(upNextPost.text);
-    // Session.set("postExist", {upNext: true});
-    var metaInfo = {name: "itemprop", content: upNextPost.text};
-    DocHead.addMeta(metaInfo);    
-  } else {
-    var metaInfo = {name: "itemprop", content: "Artist run internet radio."};
-    DocHead.addMeta(metaInfo);    
-  }
-
-
-
             SSR.compileTemplate("seo", Assets.getText('seo.html'));
 
 
             Template.seo.helpers({
+                getDesc: function() {
+
+                  if (isOnNowExist) {
+                    return "OnNow - " + onNowPost.title;
+                  } else if (isUpNextExist) {
+                    return "UpNext - " + upNextPost.title;
+                  } else if (isLastEpExist) {
+                    return "Last Episodes - " + lastEpPost.title;
+                  } else {
+                    return "Artist run internet radio.";
+                  }
+
+                },
                 lastEps: function() {
                     return Posts.find({isLastEp: true}, {sort: {submitted: -1}});
                 },

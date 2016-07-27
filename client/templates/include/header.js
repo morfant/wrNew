@@ -1,3 +1,9 @@
+
+Template.header.created = function() {
+
+};
+
+
 Template.header.helpers({
     getPlaybarNotice: function() {
         // console.log("getPlaybarNotice()");
@@ -47,6 +53,9 @@ Template.header.helpers({
     });
     
         return active && 'active';
+    },
+    getStreamingReady: function() {
+        return Session.get('streamReady');
     }
 });
 
@@ -69,12 +78,11 @@ Template.header.events({
 });
 
 
-Template.header.created = function() {
-
-};
 
 
 Template.header.rendered = function() {
+
+
 
     // $('#control_1').on('input change', function(){
     //      // console.log(this.value);

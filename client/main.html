@@ -6,14 +6,6 @@
   <meta name="naver-site-verification" content="f922d514337f09748918df1835dfa486ad7f8c16"/>
   <meta name="description" content="Artist run internet radio.">
 
-  <!-- Google crawler read this? -->
-<!--   <meta property="og:site_name" content="weather report">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="weather report">
-  <meta property="og:url" content="http://weatherreport.kr/">
-  <meta property="og:image" content="http://weatherreport.kr/preview_gp.png"> -->
-  
-
   <link rel='icon' href='/favicon.ico'>
   <title>weatherReport</title> 
 
@@ -23,7 +15,7 @@
 
 <!-- Add the following three tags inside head. -->
 <meta itemprop="name" content="weather report">
-<!-- <meta itemprop="description" content="Artist run internet radio."> -->
+<!-- <meta itemprop="description" content="{{getDesc}}"> -->
 <meta itemprop="image" content="http://weatherreport.kr/preview_gp.png">
 
 
@@ -43,7 +35,6 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
 
-  {{getArticle}}
   {{> shareButtons}}
 
   <!-- get current background image url from server -->

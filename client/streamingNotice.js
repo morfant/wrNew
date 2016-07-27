@@ -5,10 +5,11 @@ var lastEpPost = {};
 
 
 Template.streamingNotice.created = function() {
-  Session.set("postExist", {"onNow": false, "upNext": false, "lastEps": false});
   onNowPost = Posts.findOne({isOnNow: true});
   upNextPost = Posts.findOne({isUpNext: true});
   lastEpPost = Posts.findOne({isLastEp: true});
+  
+  Session.set("streamReady", false);  
 }
 
 
@@ -57,22 +58,31 @@ Template.streamingNotice.rendered = function() {
   lastEpPost = Posts.findOne({isLastEp: true});
 
   if (isOnNowExist) {
-    // Session.set("postExist", {onNow: true});
-    console.log(onNowPost.text);
-    var metaInfo = {name: "itemprop", content: onNowPost.text};
+    var metaInfo = {name: "itemprop", content: "OnNow - " + onNowPost.title};
     DocHead.addMeta(metaInfo);
 
   } else if (isUpNextExist) {
-    console.log(upNextPost.text);
-    // Session.set("postExist", {upNext: true});
-    var metaInfo = {name: "itemprop", content: upNextPost.text};
+    var metaInfo = {name: "itemprop", content: "UpNext - " + upNextPost.title};
     DocHead.addMeta(metaInfo);    
+  } else if (isLastEpExist) {
+    var metaInfo = {name: "itemprop", content: "Last Episodes - " + lastEpPost.title};
+    DocHead.addMeta(metaInfo);
   } else {
     var metaInfo = {name: "itemprop", content: "Artist run internet radio."};
-    DocHead.addMeta(metaInfo);    
+    DocHead.addMeta(metaInfo);
   }
-  // console.log(onNowPost);
-  // console.log(upNextPost);
+
+  var url = getStreamURL();
+  // console.log("url: " + url);
+  Meteor.call('checkStreamingOn', url, function(error, result) {
+    if (!error) {
+        Session.set('streamReady', true);
+        streamingReady = true;
+
+        // make play status bar
+    }
+  });
+
   
 }
 
