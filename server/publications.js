@@ -9,3 +9,7 @@ Meteor.publish('streamUrl', function() {
 Meteor.publish('bgImgUrl', function() {
   return BackgroundImageURL.find();
 });
+
+Meteor.publish('events', function() {
+  return Events.find();
+});
