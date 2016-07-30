@@ -1,5 +1,7 @@
+var MOMENT_FORMAT = "MMM D, YYYY HH:mm";
+
 var isPast = ( date ) => {
-  let today = moment().format();
+  let today = moment().format(MOMENT_FORMAT);
   return moment( today ).isAfter( date );
 };
 
@@ -63,7 +65,7 @@ Template.calender.rendered = function() {
     },
     events( start, end, timezone, callback ) {
       let data = Events.find().fetch().map( ( event ) => {
-        event.editable = !isPast( event.start );
+        // event.eventStartEditable = !isPast( event.start );
         return event;
       });
 
@@ -79,12 +81,13 @@ Template.calender.rendered = function() {
       );
     },
     eventDrop( event, delta, revert ) {
-      let date = event.start.format();
-      if ( !isPast( date ) ) {
+      let _start = event.start.format(MOMENT_FORMAT);
+      let _end = event.end.format(MOMENT_FORMAT);
+      if ( !isPast( _start ) ) {
         let update = {
           _id: event._id,
-          start: date,
-          end: date
+          start: _start,
+          end: _end
         };
 
         Meteor.call( 'editEvent', update, ( error ) => {
@@ -97,8 +100,51 @@ Template.calender.rendered = function() {
         Bert.alert( 'Sorry, you can\'t move items to the past!', 'danger' );
       }
     },
+    eventResizeStart: function(event, jsEvent, ui, view) {
+      // console.log(event);
+      console.log("start");
+      console.log(jsEvent);
+      console.log(view);
+
+    },
+    eventResizeStop: function(event, jsEvent, ui, view) {
+      console.log("stop");
+      console.log(jsEvent);
+      console.log(view);
+
+
+    },
+    eventResize: function(event, delta, revert, jsEvent, ui, view) {
+      // console.log(event);
+      console.log(delta);
+      // console.log(view);
+      // console.log(jsEvent);
+
+
+      //  if ( !isPast( _start ) ) {
+      //   let update = {
+      //     _id: event._id,
+      //     start: _start,
+      //     end: _end
+      //   };
+
+      //   Meteor.call( 'editEvent', update, ( error ) => {
+      //     if ( error ) {
+      //       Bert.alert( error.reason, 'danger' );
+      //     }
+      //   });
+      // } else {
+      //   revert();
+      //   Bert.alert( 'Sorry, you can\'t move items to the past!', 'danger' );
+      // }
+
+    },
     dayClick( date ) {
-      Session.set( 'eventModal', { type: 'add', date: date.format("MMM D, YYYY HH:mm") } );
+      Session.set( 'eventModal', {
+        type: 'add',
+        start: date.add(5, 'hour').format(MOMENT_FORMAT),
+        end: date.add(2,'hour').format(MOMENT_FORMAT)
+      });
       // console.log(date);
       // console.log(date.format("dddd, YYYY MM DD, h:mm a"));
       $( '#add-edit-event-modal' ).modal( 'show' );
