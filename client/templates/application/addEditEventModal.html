@@ -6,38 +6,56 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="add-edit-event">{{modalLabel.label}} Event</h4>
       </div>
-      <form id="add-edit-event-form">
-        <div class="modal-body">
-          <div class="form-group">
-            <div class="row">
 
-              <div class="col-xs-12 col-sm-4">
+  <div class="modal-body">      
+      <form id="add-edit-event-form">
+        
+          <div class="form-group">
+            <!-- <div class="row"> -->
+
+              <!-- <div class="col-sm-6"> -->
                 <label for="type">Event Type</label>
                 <select name="type" class="form-control">
                   <option selected="{{selected event.type 'Live' }}" value="Live">Live</option>
                   <option selected="{{selected event.type 'Recorded' }}" value="Recorded">Recorded</option>
-                  <!-- <option selected="{{selected event.type 'Miscellaneous' }}" value="Miscellaneous">Miscellaneous</option> -->
-                  <!-- <option selected="{{selected event.type 'Wedding' }}" value="Wedding">Wedding</option> -->
                 </select>
+              <!-- </div> -->
               </div>
 
-              <div class="col-xs-12 col-sm-3">
-                <label for="start">Event Starts</label>
-                <input disabled type="text" name="start" class="form-control" value="{{event.start}}">
-              </div>
+<div>&nbsp;</div>
 
-              <div class="col-xs-12 col-sm-3">
-                <label for="end">Event End</label>
-                <input disabled type="text" name="end" class="form-control" value="{{#if event.end}}{{event.end}}{{else}}{{event.start}}{{/if}}">
-              </div>
 
-            </div>
-          </div>
-
-          <div class="form-group">
+              <div class="form-group">
+            <!-- <div class="col-xs-12 col-sm-6"> -->
             <label for="title">Event Title</label>
             <input type="text" name="title" class="form-control" value="{{event.title}}">
+            <!-- </div> -->
+            </div>
+
+<div>&nbsp;</div>
+
+            <div class="form-group">
+              <!-- <div class="col-xs-12 col-sm-4"> -->
+                <label for="start">Event Starts</label>
+                <input type="text" name="start" class="form-control" value="{{event.start}}">
+              <!-- </div> -->
+              </div>
+<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+              <div class="form-group">
+              <!-- <div class="col-xs-12 col-sm-4"> -->
+                <label for="end">Event End</label>
+                <input type="text" name="end" class="form-control" value="{{#if event.end}}{{event.end}}{{else}}{{event.start}}{{/if}}">
+              <!-- </div> -->
+              </div>
+
+<!--             </div>
           </div>
+ -->
+          <!-- <div class="form-group"> -->
+
+          <!-- </div> -->
+          <!-- </div> -->
 
   <!--         <div class="row">
             <div class="col-xs-12 col-sm-4">
@@ -47,16 +65,17 @@
           </div> -->
 
 
-        </div>
+        
         <div class="modal-footer">
           {{#if modalType 'edit'}}
             <button class="btn btn-danger pull-left delete-event">Delete Event</button>
           {{/if}}
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           <button id="submitButton" type="submit" class="btn btn-success">{{modalLabel.button}} Event</button>
-
-        </div>
+          </div>
+        
       </form>
+      </div>      
     </div>
   </div>
 </div>

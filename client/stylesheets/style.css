@@ -240,8 +240,8 @@ progress {
 
 .fc-event {
   padding: 5px 10px;
-  border-color: #ddd;
-  background: #fff !important;
+  border-color: #fff;
+  /*background: #fff !important;*/
 }
 
 .fc-event .fc-content {
@@ -254,7 +254,7 @@ progress {
 }
 
 .fc-event h4 {
-  color: #666;
+  color: #fff;
   font-size: 13px;
   line-height: 18px;
   white-space: normal;
@@ -271,9 +271,12 @@ progress {
 }
 
 .fc-event p[class="type-Live"] {
-  color: red;
+  color: rgb(255, 255, 255);
 }
 
 .fc-event p[class="type-Recorded"] {
-  color: green;
+  color: rgb(255, 255, 255);
+}
+.modal-dialog{
+  width: 700px;
 }

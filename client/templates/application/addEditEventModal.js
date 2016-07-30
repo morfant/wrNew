@@ -54,6 +54,9 @@ Template.addEditEventModal.events({
           // guests: parseInt( template.find( '[name="guests"]' ).value, 10 )
         };
 
+    if (eventItem.type == 'Live') eventItem.backgroundColor = "rgb(201, 48, 44)";
+    if (eventItem.type == 'Recorded') eventItem.backgroundColor = "rgb(58, 135, 173)";
+
     if ( submitType === 'editEvent' ) {
       eventItem._id   = eventModal.event;
     }
@@ -69,9 +72,11 @@ Template.addEditEventModal.events({
   },
 
   'click .delete-event': function( e ) {
+    e.preventDefault();
+
     let eventModal = Session.get( 'eventModal' );
     if ( confirm( 'Are you sure? This is permanent.' ) ) {
-      Meteor.call( 'removeEvent', eventModal.event, ( error ) => {
+      Meteor.call( 'removeEvent', eventModal.event, function( error ) {
         if ( error ) {
           Bert.alert( error.reason, 'danger' );
         } else {

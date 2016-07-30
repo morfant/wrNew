@@ -25,8 +25,7 @@ Template.calender.rendered = function() {
   $('#kalendar').fullCalendar({
     defaultView: 'month',
     
-    aspectRatio: 1.1,
-    height: 350,
+    aspectRatio: 2,
     // contentHeight: 300,
 
     // events: [
@@ -99,7 +98,9 @@ Template.calender.rendered = function() {
       }
     },
     dayClick( date ) {
-      Session.set( 'eventModal', { type: 'add', date: date.format() } );
+      Session.set( 'eventModal', { type: 'add', date: date.format("MMM D, YYYY HH:mm") } );
+      // console.log(date);
+      // console.log(date.format("dddd, YYYY MM DD, h:mm a"));
       $( '#add-edit-event-modal' ).modal( 'show' );
     },
     eventClick( event ) {
