@@ -2,7 +2,8 @@ var userAgentRegExps = [
     /^facebookexternalhit/i, /^linkedinbot/i, /^twitterbot/i, /^facebot/i];
 
 WebApp.connectHandlers.use(function (req, res, next) {
-    if (/\?.*_escaped_fragment_=/.test(req.url) ||
+    // if (/\?.*_escaped_fragment_=/.test(req.url) ||
+    if (/_escaped_fragment_=/.test(req.url) ||        
         _.any(userAgentRegExps, function (re) {
             return re.test(req.headers['user-agent']);
         })) {

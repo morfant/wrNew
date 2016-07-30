@@ -1,8 +1,5 @@
 Template.postItem.created = function(){
   Session.set('sendingResult', {});
-
-  console.log(this.text);
-
 }
 
 var POST_HEIGHT = 80;
