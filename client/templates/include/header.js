@@ -1,4 +1,3 @@
-
 Template.header.created = function() {
 
 };
@@ -62,14 +61,14 @@ Template.header.helpers({
 Template.header.events({
     'click .playbutton': function(e) {
         // console.log("playbutton click");
-        var audio = document.getElementById('audio');
+        // var audio = document.getElementById('audio');
 
         if (audio.paused) audio.play();
 
     },
     'click .pausebutton': function(e) {
         // console.log("pausebutton click");
-        var audio = document.getElementById('audio');
+        // var audio = document.getElementById('audio');
 
         if (!audio.paused) audio.pause();
     }
@@ -82,7 +81,7 @@ Template.header.events({
 
 Template.header.rendered = function() {
 
-
+    audio = document.getElementById('audio'); //global
 
     // $('#control_1').on('input change', function(){
     //      // console.log(this.value);

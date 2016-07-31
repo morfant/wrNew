@@ -3,6 +3,7 @@ var upNextPost = {};
 var lastEpPost = {};
 // isOnNowExist = false;
 
+var checkStreamingStatus;
 
 Template.streamingNotice.created = function() {
   onNowPost = Posts.findOne({isOnNow: true});
@@ -43,7 +44,12 @@ Template.streamingNotice.helpers({
   },
   upNextText: function() {
     return upNextPost.text;
-  } 
+  },
+  strReady: function() {
+    var status = Session.get('streamReady');
+    console.log("str is ready: " + status);
+    // return Session.get('streamReady');
+  }
 
 });
 
@@ -72,16 +78,38 @@ Template.streamingNotice.rendered = function() {
     DocHead.addMeta(metaInfo);
   }
 
-  var url = getStreamURL();
-  // console.log("url: " + url);
-  Meteor.call('checkStreamingOn', url, function(error, result) {
-    if (!error) {
-        Session.set('streamReady', true);
-        streamingReady = true;
 
-        // make play status bar
-    }
-  });
+
+// if (checkStreamingStatus) Meteor.clearInterval(checkStreamingStatus);
+// checkStreamingStatus = Meteor.setInterval(function () {
+  // console.log("checkStreamingOn - interval");
+
+  // var url = getStreamURL();
+  // console.log("url: " + url);
+
+  // Meteor.call('checkStreamingOn', url, function(error, result) {
+  //   if (!error) {
+  //       console.log("no error");
+  //       Session.set('streamReady', true);
+  //       console.log(Session.get('streamReady'));
+  //       // streamingReady = true;
+
+  //       //Play automatically : 'audio' is defined header.js
+  //       // if (audio.paused) audio.play();
+
+  //       // make play status visible
+  //   } else{
+  //     console.log(error);
+
+  //   }
+
+  // });
+
+
+// }, 5000);
+
+
+
   
 }
 
