@@ -82,7 +82,6 @@ Template.streamingNotice.rendered = function() {
         // make play status bar
     }
   });
-
   
 }
 

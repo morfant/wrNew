@@ -1,8 +1,8 @@
 var uniqueID = "";
 
 Template.uploadJquery.created = function(){
-  uniqueID = this.data.uniqueID;
-  console.log(uniqueID);
+  // uniqueID = this.data.uniqueID;
+  // console.log(uniqueID);
 };
 
 Template.uploadJquery.helpers({
@@ -10,8 +10,8 @@ Template.uploadJquery.helpers({
     return {
       id: this._id,
       other: this.other,
-      hard: 'Lolcats',
-      imgID: uniqueID 
+      hard: 'Lolcats'
+      // imgID: uniqueID 
     }
   }
 });

@@ -56,7 +56,8 @@ Template.postSubmit.events({
       if (error)
         return throwError(error.reason);
       
-      Router.go('postPage', {_id: result._id});  
+      Router.go('postPage', {_id: result._id});
+
     });
 
   }
