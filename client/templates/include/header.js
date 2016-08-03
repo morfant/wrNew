@@ -1,3 +1,5 @@
+var audio = {};
+
 Template.header.created = function() {
 
 };
@@ -54,7 +56,15 @@ Template.header.helpers({
         return active && 'active';
     },
     getStreamingReady: function() {
-        return Session.get('streamReady');
+        console.log(Session.get('streamReady'));
+        var strRdy = Session.get('streamReady');
+        if (strRdy == true) {
+            console.log("play");
+            document.getElementById('audio').play();
+        } else {
+            console.log("pause");
+            document.getElementById('audio').pause();
+        }
     }
 });
 
@@ -82,6 +92,7 @@ Template.header.events({
 Template.header.rendered = function() {
 
     audio = document.getElementById('audio'); //global
+
 
     // $('#control_1').on('input change', function(){
     //      // console.log(this.value);
