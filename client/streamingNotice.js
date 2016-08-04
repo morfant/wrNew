@@ -45,9 +45,21 @@ Template.streamingNotice.helpers({
   upNextText: function() {
     return upNextPost.text;
   },
-  strReady: function() {
+  getStreamReady: function() {
     var status = Session.get('streamReady');
     console.log("str is ready: " + status);
+    return status;
+  },
+  setCng: function() {
+    var status = Session.get('streamReady');
+    var chatandgo = document.getElementsByTagName("iframe")[0];
+    if (chatandgo){
+      if (status){
+        chatandgo.style.visibility = "visible";
+      } else {
+        chatandgo.style.visibility = "hidden";
+      }
+    }
   }
 
 });
@@ -106,8 +118,6 @@ checkStreamingStatus = Meteor.setInterval(function () {
 
 
 }, CHECK_INTERVAL);
-
-
 
   
 }

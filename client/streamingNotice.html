@@ -2,7 +2,13 @@
 <template name="streamingNotice">
   <div class="container articles">
 
-  {{> chatAndGo}}
+
+  
+
+  {{#if getStreamReady}}
+    {{> chatAndGo}}
+  {{/if}}
+  {{setCng}}  
 
   {{#if onNowExist}}
 

@@ -1,7 +1,7 @@
-var audio = {};
+var pageRendered = false;
 
 Template.header.created = function() {
-
+    pageRendered = false
 };
 
 
@@ -55,30 +55,36 @@ Template.header.helpers({
     
         return active && 'active';
     },
-    getStreamingReady: function() {
-        console.log(Session.get('streamReady'));
-        var strRdy = Session.get('streamReady');
-        if (strRdy == true) {
-            console.log("play");
-            document.getElementById('audio').play();
-        } else {
-            console.log("pause");
-            document.getElementById('audio').pause();
+    autoPlay: function() {
+        // console.log(Session.get('streamReady'));
+        if (pageRendered){
+            var audio = document.getElementById('audio');
+            var strRdy = Session.get('streamReady');
+            if (strRdy == true) {
+                // console.log("play");
+                audio.load();
+                audio.oncanplay = function(){
+                    audio.play();
+                }
+            }
         }
+    },
+    getStreamReady: function() {
+        return Session.get('streamReady');
     }
 });
 
 Template.header.events({
     'click .playbutton': function(e) {
         // console.log("playbutton click");
-        // var audio = document.getElementById('audio');
+        var audio = document.getElementById('audio');
 
         if (audio.paused) audio.play();
 
     },
     'click .pausebutton': function(e) {
         // console.log("pausebutton click");
-        // var audio = document.getElementById('audio');
+        var audio = document.getElementById('audio');
 
         if (!audio.paused) audio.pause();
     }
@@ -91,8 +97,7 @@ Template.header.events({
 
 Template.header.rendered = function() {
 
-    audio = document.getElementById('audio'); //global
-
+    pageRendered = true;
 
     // $('#control_1').on('input change', function(){
     //      // console.log(this.value);

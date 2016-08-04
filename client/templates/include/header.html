@@ -43,11 +43,12 @@
           <!-- {{/unless}} -->
 
 
-        {{getStreamingReady}}
-          <!-- progress bar -->
-          <!-- {{#if getStreamingReady}} -->
+        {{autoPlay}}
 
-           <li><a href="">
+          <!-- progress bar -->
+          {{#if getStreamReady}}
+
+          <!--  <li><a href="">
             <div class="desktop-progress">
               <div class="start-time">05:00</div>
               <progress value="0" max="100"></progress>
@@ -56,7 +57,9 @@
 
             </a>
           </li>
-          <!-- {{/if}} -->
+ -->
+
+          {{/if}}
 
         </ul>
 
