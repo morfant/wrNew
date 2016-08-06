@@ -49,7 +49,7 @@ Template.recScript.events({
     },
     'click .recStart': function(e, template) {
         e.preventDefault();
-        var command = "/home/giy/rec.sh";
+        var command = "/host_Home/rec.sh"; //in meteor '/host_Home' == in server machine '/home/giy'.
 
         Meteor.call('runCommand', command, function (error, result) {
             if (error) {
@@ -66,7 +66,7 @@ Template.recScript.events({
     },
     'click .recStop': function(e, template) {
         e.preventDefault();
-        var command = "/home/giy/stoprec.sh";
+        var command = "/host_Home/stoprec.sh";
 
         Meteor.call('runCommand', command, function (error, result) {
             if (error) {
