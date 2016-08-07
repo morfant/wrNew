@@ -90,7 +90,6 @@ Template.streamingNotice.rendered = function() {
   }
 
 
-
 if (checkStreamingStatus) Meteor.clearInterval(checkStreamingStatus);
 checkStreamingStatus = Meteor.setInterval(function () {
   // console.log("checkStreamingOn - interval");
@@ -101,12 +100,18 @@ checkStreamingStatus = Meteor.setInterval(function () {
   Meteor.call('checkStreamingOn', url, function(error, result) {
     if (!error) {
       // console.log(result);
+      // var json = JSON.parse(result);
+      // console.log(json);
+
       // console.log(result.icestats.source);
-      var streamSrc = result.icestats.source;
-      if (_.isEmpty(streamSrc)){
-        Session.set('streamReady', false);
-      } else {
+
+      var strReady = result.includes("source");
+      // var streamSrc = result.icestats.source;
+      // if (_.isEmpty(streamSrc)){
+      if (strReady) {
         Session.set('streamReady', true);
+      } else {
+        Session.set('streamReady', false);
       }
 
     } else{
