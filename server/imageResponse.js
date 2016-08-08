@@ -1,6 +1,6 @@
 fs = Meteor.npmRequire('fs');
 
-WebApp.connectHandlers.use('/images', function(req, res){
+WebApp.connectHandlers.use('/host_Uploads', function(req, res){
 
     // console.log("images on server");
     var fileName = req.originalUrl.split('/')[2];
@@ -11,7 +11,13 @@ WebApp.connectHandlers.use('/images', function(req, res){
     if (!_.contains(canGetExts, ext))
         throw new Meteor.Error( 500, 'jpg, jpeg, png only acceptable.' );
 
-    var file = fs.readFile(process.env.PWD + '/host_Uploads/' + fileName,
+    var filePath;
+    if (forDeploy){
+        filePath = '/host_Uploads/' + fileName;
+    } else {
+        filePath = process.env.PWD + '/host_Uploads/' + fileName;
+    }
+    var file = fs.readFile(filePath,
         function(error, data){
             if (error){
                 // console.log(error);

@@ -1,13 +1,23 @@
-//file:/server/init.js
+forDeploy = true;
+
+var _tmpDir, _uploadDir;
+
+if (forDeploy){
+  _tmpDir = '/host_Uploads/tmp/';
+  _uploadDir = '/host_Uploads/';
+} else {
+  _tmpDir = process.env.PWD + '/host_Uploads/tmp/';
+  _uploadDir = process.env.PWD +  '/host_Uploads/';
+}
+
+
 Meteor.startup(function () {
 
 
   UploadServer.init({
 
-    tmpDir: process.env.PWD + '/host_Uploads/tmp/',
-    uploadDir: process.env.PWD +  '/host_Uploads/',
-    // tmpDir: '/host_Uploads/tmp/',
-    // uploadDir: '/host_Uploads/',
+    tmpDir: _tmpDir,
+    uploadDir: _uploadDir,
     checkCreateDirectories: true,
     getDirectory: function(fileInfo, formData) {
       // create a sub-directory in the uploadDir based on the content type (e.g. 'images')
