@@ -104,8 +104,9 @@ checkStreamingStatus = Meteor.setInterval(function () {
       // console.log(json);
 
       // console.log(result.icestats.source);
-
-      var strReady = result.includes("source");
+      // console.log(result);
+      // var strReady = result.includes(STREAMING_URL);
+      var strReady = result.includes(STREAMING_MOUNTPOINT);
       // var streamSrc = result.icestats.source;
       // if (_.isEmpty(streamSrc)){
       if (strReady) {
