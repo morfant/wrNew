@@ -1,4 +1,4 @@
-forDeploy = true;
+forDeploy = false;
 
 var _tmpDir, _uploadDir;
 

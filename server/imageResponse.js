@@ -1,6 +1,7 @@
 fs = Meteor.npmRequire('fs');
 
 WebApp.connectHandlers.use('/host_Uploads', function(req, res){
+  console.log("path : /host_Uploads");
 
     // console.log("images on server");
     var fileName = req.originalUrl.split('/')[2];
@@ -15,7 +16,19 @@ WebApp.connectHandlers.use('/host_Uploads', function(req, res){
     if (forDeploy){
         filePath = '/host_Uploads/' + fileName;
     } else {
-        filePath = process.env.PWD + '/host_Uploads/' + fileName;
+
+        var pwdStr = process.env.PWD;
+        console.log(pwdStr);
+        console.log(typeof pwdStr);
+
+        if (pwdStr.includes("cordova")) {
+          console.log("This is cordova app");
+          filePath = process.env.PWD + '/../../../host_Uploads/' + fileName;
+        } else {
+          console.log("This is NOT cordova app");
+          filePath = process.env.PWD + '/host_Uploads/' + fileName;
+        }
+        console.log(filePath);
     }
     var file = fs.readFile(filePath,
         function(error, data){
@@ -29,8 +42,7 @@ WebApp.connectHandlers.use('/host_Uploads', function(req, res){
                     'Content-Type': 'image/' + ext,
                     'Content-Length': data.length
                 });
-                res.end(data); //end the respone 
+                res.end(data); //end the respone
             }
         });
 });
-
