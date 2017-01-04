@@ -1,47 +1,15 @@
 <template name="footer">
   <footer>
-
-
-<!-- <div class="container"> -->
-
-  <!-- </div> -->
-
-
-
     <div class="footer navbar-fixed-bottom" style="align:center">
-      <!-- <span> <a href="weathermusic11.tumblr.com"> 11 </a></span> -->
-
-
-      <!-- <ul class="nav navbar-nav"> -->
-
-
-<div class="container">
-
-    <div class="row">
-
-<!--       <div class="col-xs-6">
-      {{> footer_col_1}}
+      <div class="container">
+        <div class="row">
+        {{#unless isItCordova}}
+          <div class="col-xs-12">
+            {{> footer_col_2}}
+          </div>
+        {{/unless}}
+        </div>
       </div>
- -->
-      <div class="col-xs-12">
-      {{> footer_col_2}}
-      </div>
-
-    </div>
-
-  </div>
-
-
-
-  <!-- 
-      <p>
-      host 김지연 Jiyeon Kim | sitebuild 이강일 Gangil Yi <br>
-      live audio streamer is build on <a href="http://soundtent.org/soundcamp_resources.html" target=blank>Soundcamp PI streamer </a><br>
-      contact weatherreport@gmail.com <br>
-      </p> -->
-
-      <!-- {{> hackpad}} -->
-
     </div>
   </footer>
 

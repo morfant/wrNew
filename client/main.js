@@ -2,8 +2,8 @@ Template.body.created = function() {
 
 }
 
-
 Template.body.helpers({
+
   getBgImgURL: function() {
     // console.log("getBgImgURL()");
 
