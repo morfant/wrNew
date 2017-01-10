@@ -1,7 +1,7 @@
 // This section sets up some basic app metadata,
 // the entire section is optional.
 App.info({
-  id: 'kr.weatherreport',
+  id: 'kr.weatherreport.www',
   // name: 'weather report + transparent music',
   description: 'Listening app for the performance \'Transparent Music\'',
   author: 'teum11 + giy',
@@ -33,5 +33,5 @@ App.setPreference('HideKeyboardFormAccessoryBar', true);
 // });
 
 App.configurePlugin('phonegap-plugin-push', {
-  SENDER_ID: 53132223643 
+  SENDER_ID: 53132223643
 });
