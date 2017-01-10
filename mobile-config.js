@@ -31,3 +31,7 @@ App.setPreference('HideKeyboardFormAccessoryBar', true);
 //   APP_ID: '1234567890',
 //   API_KEY: 'supersecretapikey'
 // });
+
+App.configurePlugin('phonegap-plugin-push', {
+  SENDER_ID: 53132223643 
+});

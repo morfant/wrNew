@@ -9,8 +9,8 @@ Template.streamingNotice.created = function() {
   onNowPost = Posts.findOne({isOnNow: true});
   upNextPost = Posts.findOne({isUpNext: true});
   lastEpPost = Posts.findOne({isLastEp: true});
-  
-  Session.set("streamReady", false);  
+
+  Session.set("streamReady", false);
 }
 
 
@@ -38,7 +38,7 @@ Template.streamingNotice.helpers({
   },
   onNowText: function() {
     return onNowPost.text;
-  }, 
+  },
   upNextTitle: function() {
     return upNextPost.title;
   },
@@ -80,7 +80,7 @@ Template.streamingNotice.rendered = function() {
 
   } else if (isUpNextExist) {
     var metaInfo = {name: "itemprop", content: "UpNext - " + upNextPost.title};
-    DocHead.addMeta(metaInfo);    
+    DocHead.addMeta(metaInfo);
   } else if (isLastEpExist) {
     var metaInfo = {name: "itemprop", content: "Last Episodes - " + lastEpPost.title};
     DocHead.addMeta(metaInfo);
@@ -90,42 +90,39 @@ Template.streamingNotice.rendered = function() {
   }
 
 
-if (checkStreamingStatus) Meteor.clearInterval(checkStreamingStatus);
-checkStreamingStatus = Meteor.setInterval(function () {
-  // console.log("checkStreamingOn - interval");
+  // auto connect and retry
+  // if (checkStreamingStatus) Meteor.clearInterval(checkStreamingStatus);
+  // checkStreamingStatus = Meteor.setInterval(function () {
+  //   // console.log("checkStreamingOn - interval");
+  //
+  //   var url = getStreamURL();
+  //   // console.log("url: " + url);
+  //
+  //   Meteor.call('checkStreamingOn', url, function(error, result) {
+  //     if (!error) {
+  //       // console.log(result);
+  //       // var json = JSON.parse(result);
+  //       // console.log(json);
+  //
+  //       // console.log(result.icestats.source);
+  //       // console.log(result);
+  //       // var strReady = result.includes(STREAMING_URL);
+  //       var strReady = result.includes(STREAMING_MOUNTPOINT);
+  //       // var streamSrc = result.icestats.source;
+  //       // if (_.isEmpty(streamSrc)){
+  //       if (strReady) {
+  //         Session.set('streamReady', true);
+  //       } else {
+  //         Session.set('streamReady', false);
+  //       }
+  //
+  //     } else {
+  //       console.log(error);
+  //     }
+  //
+  //   });
+  //
+  // }, CHECK_INTERVAL);
+  //
 
-  var url = getStreamURL();
-  // console.log("url: " + url);
-
-  Meteor.call('checkStreamingOn', url, function(error, result) {
-    if (!error) {
-      // console.log(result);
-      // var json = JSON.parse(result);
-      // console.log(json);
-
-      // console.log(result.icestats.source);
-      // console.log(result);
-      // var strReady = result.includes(STREAMING_URL);
-      var strReady = result.includes(STREAMING_MOUNTPOINT);
-      // var streamSrc = result.icestats.source;
-      // if (_.isEmpty(streamSrc)){
-      if (strReady) {
-        Session.set('streamReady', true);
-      } else {
-        Session.set('streamReady', false);
-      }
-
-    } else{
-      console.log(error);
-
-    }
-
-  });
-
-
-}, CHECK_INTERVAL);
-
-  
 }
-
-

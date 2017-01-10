@@ -45,8 +45,8 @@ Template.streamURLSetting.events({
       if (result){
         template.find('#submitResult').textContent = " : " + getStreamURL();
       }
-      
-      Router.go('streamingNotice');  
+
+      Router.go('streamingNotice');
     });
 
   }
@@ -54,6 +54,5 @@ Template.streamURLSetting.events({
 
 
 Template.streamURLSetting.rendered = function() {
-  this.find('#submitResult').textContent = " : " + getStreamURL();
+  // this.find('#submitResult').textContent = " : " + getStreamURL();
 };
-

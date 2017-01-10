@@ -1,4 +1,8 @@
-forDeploy = false;
+forDeploy = true;
+// forDeploy = false;
+console.log("---------------- CHECK before Deploy ----------------");
+console.log("forDeploy in /server/init.js: " + forDeploy);
+console.log("--------------- forDeploy must be TRUE --------------");
 
 var _tmpDir, _uploadDir;
 
@@ -19,6 +23,7 @@ Meteor.startup(function () {
     tmpDir: _tmpDir,
     uploadDir: _uploadDir,
     checkCreateDirectories: true,
+    overwrite: true,
     getDirectory: function(fileInfo, formData) {
       // create a sub-directory in the uploadDir based on the content type (e.g. 'images')
       // return formData.contentType;
@@ -38,5 +43,5 @@ Meteor.startup(function () {
     }
   });
 
-  
+
 });
