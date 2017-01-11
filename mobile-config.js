@@ -2,10 +2,11 @@
 // the entire section is optional.
 App.info({
   id: 'kr.weatherreport.www',
-  // name: 'weather report + transparent music',
-  description: 'Listening app for the performance \'Transparent Music\'',
+  name: 'Transparent Music',
+  version: "0.0.1",
+  description: 'Listening app for the performance \'Transparent Music\'.',
   author: 'teum11 + giy',
-  email: 'teum11@gmail.com',
+  email: 'giy.hands@gmail.com',
   website: 'http://weatherreport.kr'
 });
 
@@ -25,6 +26,8 @@ App.info({
 // Set PhoneGap/Cordova preferences
 App.setPreference('BackgroundColor', '0xff0000ff');
 App.setPreference('HideKeyboardFormAccessoryBar', true);
+App.setPreference('Orientation', 'default');
+App.setPreference('Orientation', 'all', 'ios');
 
 // Pass preferences for a particular PhoneGap/Cordova plugin
 // App.configurePlugin('com.phonegap.plugins.facebookconnect', {
@@ -35,3 +38,13 @@ App.setPreference('HideKeyboardFormAccessoryBar', true);
 App.configurePlugin('phonegap-plugin-push', {
   SENDER_ID: 53132223643
 });
+
+
+
+// Access whitelist
+App.accessRule('https://drive.google.com/*');
+App.accessRule('http://jjwc.cafe24.com/*');
+App.accessRule('http://weatherreport.kr/*');
+App.accessRule('https://enginex.kadira.io/*');
+App.accessRule('https://fonts.googleapis.com/*');
+App.accessRule('https://fonts.gstatic.com/*');

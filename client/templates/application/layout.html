@@ -1,14 +1,16 @@
 <template name="layout">
 
-
   <div class="container">
     <!-- {{> backgroundImage}}     -->
     {{> header}}
     {{> errors}}
-    
+
     <div id="main" class="row-fluid">
 
+    {{#unless isItCordova}}
       {{> yield}}
+    {{/unless}}
+
     </div>
 
     {{> footer}}

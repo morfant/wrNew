@@ -14,14 +14,10 @@ Template.body.helpers({
       // var bgUrlTag = 'url(\'' + bgUrl + '\')';
       bgUrlObj = {};
       bgUrlObj['background-image'] = bgUrlTag;
-      console.log(bgUrlObj);
-      console.log(bgUrl);
-      console.log(bgUrlTag);
+      // console.log(bgUrlObj);
+      // console.log(bgUrl);
+      // console.log(bgUrlTag);
       $('body').css(bgUrlObj);
-      // document.body.style.backgroundImage = bgUrlTag;
-
-// $('selector').css({'background-image':'url(images/example.jpg)'});
-
 
     }
   }
