@@ -5,3 +5,9 @@ Template.registerHelper("isItCordova", function () {
       return false;
     }
 });
+
+Template.registerHelper("getStreamReady", function() {
+    var status = Session.get('streamReady');
+    // console.log("str is ready: " + status);
+    return status;
+});

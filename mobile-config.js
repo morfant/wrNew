@@ -44,7 +44,7 @@ App.configurePlugin('phonegap-plugin-push', {
 // Access whitelist
 App.accessRule('https://drive.google.com/*');
 App.accessRule('http://jjwc.cafe24.com/*');
-App.accessRule('http://weatherreport.kr/*');
+App.accessRule('http://weatherreport.kr:8000/*');
 App.accessRule('https://enginex.kadira.io/*');
 App.accessRule('https://fonts.googleapis.com/*');
 App.accessRule('https://fonts.gstatic.com/*');

@@ -3,7 +3,33 @@ var upNextPost = {};
 var lastEpPost = {};
 // isOnNowExist = false;
 
-var checkStreamingStatus;
+var checkStreamingStatusInterval = false;
+
+var checkStreamingStatus = function(){
+  var url = getStreamURL();
+  Meteor.call('checkStreamingOn', url, function(error, result) {
+    if (!error) {
+      // console.log(result);
+      // var json = JSON.parse(result);
+      // console.log(json);
+
+      // console.log(result.icestats.source);
+      // console.log(result);
+      // var strReady = result.includes(STREAMING_URL);
+      var strReady = result.includes(STREAMING_MOUNTPOINT);
+      // var streamSrc = result.icestats.source;
+      // if (_.isEmpty(streamSrc)){
+      if (strReady) {
+        Session.set('streamReady', true);
+      } else {
+        Session.set('streamReady', false);
+      }
+    } else {
+      console.log(error);
+    }
+    // console.log("checkStreamingStatus() - streamReady : " + Session.get('streamReady'));
+  });
+};
 
 Template.streamingNotice.created = function() {
   onNowPost = Posts.findOne({isOnNow: true});
@@ -17,9 +43,6 @@ Template.streamingNotice.created = function() {
 Template.streamingNotice.helpers({
   lastEps: function() {
     return Posts.find({isLastEp: true}, {sort: {submitted: -1}});
-  },
-  imgExist: function() {
-
   },
   onNowExist: function() {
     isOnNowExist = !_.isEmpty(onNowPost);
@@ -45,11 +68,6 @@ Template.streamingNotice.helpers({
   upNextText: function() {
     return upNextPost.text;
   },
-  getStreamReady: function() {
-    var status = Session.get('streamReady');
-    console.log("str is ready: " + status);
-    return status;
-  },
   setCng: function() {
     var status = Session.get('streamReady');
     var chatandgo = document.getElementsByTagName("iframe")[0];
@@ -60,6 +78,15 @@ Template.streamingNotice.helpers({
         chatandgo.style.visibility = "hidden";
       }
     }
+  },
+  startInterval: function() {
+    if (checkStreamingStatusInterval) Meteor.clearInterval(checkStreamingStatusInterval);
+    checkStreamingStatusInterval = Meteor.setInterval(checkStreamingStatus, CHECK_INTERVAL);
+    console.log("startInterval()");
+  },
+  stopInterval: function() {
+    if (checkStreamingStatusInterval) Meteor.clearInterval(checkStreamingStatusInterval);
+    console.log("stopInterval()");
   }
 
 });
@@ -68,7 +95,12 @@ Template.streamingNotice.events({
 
 });
 
-
+//
+// var intervalClear = function() {
+//   if (checkStreamingStatus) Meteor.clearInterval(checkStreamingStatus);
+//   console.log("getStreamReady(): " + Session.get('streamReady'));
+// };
+//
 Template.streamingNotice.rendered = function() {
   onNowPost = Posts.findOne({isOnNow: true});
   upNextPost = Posts.findOne({isUpNext: true});
@@ -77,7 +109,6 @@ Template.streamingNotice.rendered = function() {
   if (isOnNowExist) {
     var metaInfo = {name: "itemprop", content: "OnNow - " + onNowPost.title};
     DocHead.addMeta(metaInfo);
-
   } else if (isUpNextExist) {
     var metaInfo = {name: "itemprop", content: "UpNext - " + upNextPost.title};
     DocHead.addMeta(metaInfo);
@@ -90,39 +121,26 @@ Template.streamingNotice.rendered = function() {
   }
 
 
-  // auto connect and retry
-  // if (checkStreamingStatus) Meteor.clearInterval(checkStreamingStatus);
+  // Try repeatedly auto connect and retry
   // checkStreamingStatus = Meteor.setInterval(function () {
   //   // console.log("checkStreamingOn - interval");
-  //
   //   var url = getStreamURL();
   //   // console.log("url: " + url);
-  //
   //   Meteor.call('checkStreamingOn', url, function(error, result) {
   //     if (!error) {
-  //       // console.log(result);
-  //       // var json = JSON.parse(result);
-  //       // console.log(json);
-  //
-  //       // console.log(result.icestats.source);
-  //       // console.log(result);
-  //       // var strReady = result.includes(STREAMING_URL);
   //       var strReady = result.includes(STREAMING_MOUNTPOINT);
-  //       // var streamSrc = result.icestats.source;
-  //       // if (_.isEmpty(streamSrc)){
   //       if (strReady) {
   //         Session.set('streamReady', true);
   //       } else {
   //         Session.set('streamReady', false);
+  //         // console.log("streaming is Not ready!");
   //       }
-  //
   //     } else {
   //       console.log(error);
+  //       console.log("checkStreamingOn() has error(s)!");
   //     }
-  //
   //   });
-  //
+  //   console.log("streamReady: " + Session.get('streamReady'));
   // }, CHECK_INTERVAL);
   //
-
 }

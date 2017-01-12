@@ -29,7 +29,7 @@ Template.streamURLSetting.events({
       url: $(e.target).find('[name=streamURL]').val()
     };
 
-    // console.log(streamUrl);
+    console.log(streamUrl);
 
     var errors = validateStreamUrl(streamUrl);
     if (errors.streamURL)
@@ -43,10 +43,11 @@ Template.streamURLSetting.events({
         return throwError(error.reason);
 
       if (result){
+        // console.log(result);
         template.find('#submitResult').textContent = " : " + getStreamURL();
       }
 
-      Router.go('streamingNotice');
+      // Router.go('streamingNotice');
     });
 
   }
@@ -54,5 +55,5 @@ Template.streamURLSetting.events({
 
 
 Template.streamURLSetting.rendered = function() {
-  // this.find('#submitResult').textContent = " : " + getStreamURL();
+  this.find('#submitResult').textContent = " : " + getStreamURL();
 };

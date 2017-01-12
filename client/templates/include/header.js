@@ -48,11 +48,11 @@ Template.header.helpers({
     activeRouteClass: function(/* route names */) {
         var args = Array.prototype.slice.call(arguments, 0);
         args.pop();
-    
+
         var active = _.any(args, function(name) {
             return Router.current() && Router.current().route.getName() === name
     });
-    
+
         return active && 'active';
     },
     autoPlay: function() {
@@ -61,35 +61,47 @@ Template.header.helpers({
             var audio = document.getElementById('audio');
             var strRdy = Session.get('streamReady');
             if (strRdy == true) {
+                // playButton.src = "/images/big_play.jpg";
                 // console.log("play");
                 audio.load();
                 audio.oncanplay = function(){
                     audio.play();
+                    var playButton = document.getElementById('playbutton');
+                    playButton.src = "/images/big_pause.jpg";
+                    playButton.id = 'pausebutton';
                 }
             }
         }
     },
-    getStreamReady: function() {
-        return Session.get('streamReady');
-    }
 });
 
+
 Template.header.events({
-    'click .playbutton': function(e) {
+    'click #playbutton': function(e) {
         // console.log("playbutton click");
         var audio = document.getElementById('audio');
-
-        if (audio.paused) audio.play();
+        var isStreamReady = Session.get('streamReady');
+        if (audio.paused && isStreamReady){
+          audio.play();
+          // Change element id, image 'playbutton -> pausebutton'
+          var button = document.getElementById('playbutton');
+          button.src = "/images/big_pause.jpg";
+          button.id = 'pausebutton';
+        }
 
     },
-    'click .pausebutton': function(e) {
+    'click #pausebutton': function(e) {
         // console.log("pausebutton click");
         var audio = document.getElementById('audio');
+        if (!audio.paused){
+          audio.pause();
+          // Change element id, image 'pausebutton -> playbutton'
+          var button = document.getElementById('pausebutton');
+          button.src = "/images/big_play.jpg";
+          button.id = 'playbutton';
+        }
 
-        if (!audio.paused) audio.pause();
     }
-
-  
 });
 
 
@@ -112,22 +124,3 @@ Template.header.rendered = function() {
     // });
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

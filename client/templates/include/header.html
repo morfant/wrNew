@@ -2,7 +2,6 @@
   <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid height-full">
 
-
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
           <span class="sr-only">Toggle navigation</span>
@@ -13,14 +12,21 @@
 
         <audio id="audio">
           <!-- get stream source url from db reactively -->
-          {{getStreamSrc}} 
+          {{getStreamSrc}}
           <source id="audioSource" src="" type="audio/mpeg" />
           <!-- <source id="audioSource" src="http://jjwc.cafe24.com:8000/puredata" type="audio/mpeg" /> -->
         </audio>
 
+        {{isPlaying}}
+
         <!-- a tag is fake to make finger pointer -->
-        <a href=""><img class="playbutton" src="/images/big_play.jpg" height="55" width="50"></a>
-        <a href=""><img class="pausebutton" src="/images/big_pause.jpg" height="70" width="70"></a>
+
+        {{#if getStreamReady}}
+          <a href=""><img id="playbutton" src="/images/big_play.jpg" height="55" width="50"></a>
+        {{else}}
+          <a href=""><img id="playbutton" src="/images/big_play_gray.png" height="55" width="50"></a>
+        {{/if}}
+        <!-- <a href=""><img class="pausebutton" src="/images/big_pause.jpg" height="70" width="70"></a> -->
       </div>
 
 
@@ -29,7 +35,6 @@
           {{#if currentUser}}<li><a href="{{pathFor 'streamingNotice'}}">Live</a></li>{{/if}}
           {{#if currentUser}}<li><a href="{{pathFor 'postsList'}}">List</a></li>{{/if}}
           {{#if currentUser}}<li><a href="{{pathFor 'postSubmit'}}">Submit</a></li>{{/if}}
-
           {{#if currentUser}}<li><a href="{{pathFor 'settings'}}">Setting</a></li>{{/if}}
 
          <!--  {{#if currentUser}}<li><a href="{{pathFor 'streamURLSetting'}}">streamSet</a></li>{{/if}}
@@ -37,35 +42,13 @@
           {{#if currentUser}}<li><a href="{{pathFor 'recScript'}}">recOnServer</a></li>{{/if}} -->
 
           <!-- {{#unless getOnNowExist}} -->
-          <li><a class="playbutton" href=""><b>
+          <li><a class="_playbutton" href=""><b>
             {{{getPlaybarNotice}}}
           </b></a></li>
           <!-- {{/unless}} -->
 
-
-        {{autoPlay}}
-
-          <!-- progress bar -->
-          {{#if getStreamReady}}
-
-          <!--  <li><a href="">
-            <div class="desktop-progress">
-              <div class="start-time">05:00</div>
-              <progress value="0" max="100"></progress>
-              <div class="end-time">07:00</div>
-            </div>
-
-            </a>
-          </li>
- -->
-
-          {{/if}}
-
+          <!-- {{autoPlay}} -->
         </ul>
-
- 
-         <!-- <ul class="nav navbar-nav navbar-right">{{> loginButtons}}</ul> -->
-
 
       </div>
     </div>

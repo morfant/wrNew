@@ -1,5 +1,4 @@
 <head>
-
   <meta name="fragment" content="!">
   <meta name="google-site-verification" content="X9t_dV4VTxFLRLRAC66p_o0zlI8ccml5guPyuHBwGAM" /> <!-- jjwc -->
   <meta name="google-site-verification" content="n7VfNUV2wIJsqqEWzPPOucVoC7vTAAqYENThiA1A-eM" /> <!-- weatherreport -->
@@ -10,22 +9,18 @@
   <title>weatherReport+TransparentMusic</title>
 
 
-<!-- Update your html tag to include the itemscope and itemtype attributes. -->
-<html itemscope itemtype="http://schema.org/Event">
+  <!-- Update your html tag to include the itemscope and itemtype attributes. -->
+  <html itemscope itemtype="http://schema.org/Event">
 
-<!-- Add the following three tags inside head. -->
-<meta itemprop="name" content="weather report">
-<!-- <meta itemprop="description" content="{{getDesc}}"> -->
-<meta itemprop="image" content="http://weatherreport.kr/preview_gp.png">
-
-
+  <!-- Add the following three tags inside head. -->
+  <meta itemprop="name" content="weather report">
+  <!-- <meta itemprop="description" content="{{getDesc}}"> -->
+  <meta itemprop="image" content="http://weatherreport.kr/preview_gp.png">
 </head>
 
 
 <body id="background" >
-
   {{#unless isItCordova}}
-
     <!-- FACEBOOK API INIT -->
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
@@ -35,8 +30,6 @@
       js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1041541679255318";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
-
-
     {{> shareButtons}}
   {{/unless}}
 
@@ -44,26 +37,25 @@
   {{getBgImgURL}}
 
   <div class="container">
+    {{#if isItCordova}}
+      <!-- <h3 id="mainTitle">Transparent Music</h3> -->
+      <br />
+      <h1 id="mainTitle">Transparent<br />Music</h1>
+    {{else}}
+      <h1 id="mainTitle">weather report</h1>
+    {{/if}}
 
-  {{#if isItCordova}}
-    <!-- <h3 id="mainTitle">Transparent Music</h3> -->
-    <h1 id="mainTitle">Transparent<br />Music</h1>
-  {{else}}
-    <h1 id="mainTitle">weather report</h1>
-  {{/if}}
-
-
-  <p style="font-size:12px">
-    <!-- 24시간 라디오 one day radio 제철방송 seasonal broadcasts 라이브 스트리밍 live streaming 즉흥 improvising <br /> -->
-  </p>
-
-  <p style="font-size:14px">
     {{#unless isItCordova}}
-      <!-- <a href="https://listenerlog.hackpad.com/" target="_blank">듣기일지 listener's log</a> -->
-      <a href="http://us11.campaign-archive1.com/home/?u=2df8abd31ed93a75e3f1a9d74&id=0db8bf840f" target="_blank">아카이브 weather report 2015</a>
-      <a href="http://weathermusic.us11.list-manage.com/subscribe?u=2df8abd31ed93a75e3f1a9d74&id=0db8bf840f" target="_blank">구독 subscribe</a>
+      <p style="font-size:12px">
+        <!-- 24시간 라디오 one day radio 제철방송 seasonal broadcasts 라이브 스트리밍 live streaming 즉흥 improvising <br /> -->
+      </p>
+
+      <p style="font-size:14px">
+          <!-- <a href="https://listenerlog.hackpad.com/" target="_blank">듣기일지 listener's log</a> -->
+          <a href="http://us11.campaign-archive1.com/home/?u=2df8abd31ed93a75e3f1a9d74&id=0db8bf840f" target="_blank">아카이브 weather report 2015</a>
+          <a href="http://weathermusic.us11.list-manage.com/subscribe?u=2df8abd31ed93a75e3f1a9d74&id=0db8bf840f" target="_blank">구독 subscribe</a>
+      </p>
     {{/unless}}
-  </p>
 
   </div>
 </body>
