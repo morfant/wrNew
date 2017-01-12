@@ -4,6 +4,22 @@ Template.header.created = function() {
     pageRendered = false
 };
 
+var getStreamURL = function() {
+    var data = StreamURL.find({}); //reactive
+    var dataExist = data.count();
+    // console.log(dataExist);
+    if (dataExist) {
+        var url = data.fetch()[0].streamURL.url;
+        // console.log(url);
+        var src = document.getElementById('audioSource');
+        src.src = url;
+
+        // preload
+        audio.load();
+        document.getElementById('audio').paused = true;
+        // document.getElementById('audio').muted = false;
+    }
+}
 
 Template.header.helpers({
     getPlaybarNotice: function() {
@@ -25,20 +41,7 @@ Template.header.helpers({
         };
     },
     getStreamSrc: function() {
-        var data = StreamURL.find({}); //reactive
-        var dataExist = data.count();
-        // console.log(dataExist);
-        if (dataExist) {
-            var url = data.fetch()[0].streamURL.url;
-            // console.log(url);
-            var src = document.getElementById('audioSource');
-            src.src = url;
-
-            // preload
-            audio.load();
-            document.getElementById('audio').paused = true;
-            // document.getElementById('audio').muted = false;
-        }
+      getStreamURL();
     },
     getOnNowExist: function() {
         var ison = Posts.find({isOnNow: true}).count(); //reactive
@@ -78,8 +81,10 @@ Template.header.helpers({
 
 Template.header.events({
     'click #playbutton': function(e) {
-        // console.log("playbutton click");
+        console.log("playbutton click");
         var audio = document.getElementById('audio');
+        var audioSrc = document.getElementById('audioSource');
+        console.log("audioSrc: " + audioSrc.src);
         var isStreamReady = Session.get('streamReady');
         if (audio.paused && isStreamReady){
           audio.play();
@@ -91,7 +96,7 @@ Template.header.events({
 
     },
     'click #pausebutton': function(e) {
-        // console.log("pausebutton click");
+        console.log("pausebutton click");
         var audio = document.getElementById('audio');
         if (!audio.paused){
           audio.pause();
@@ -110,6 +115,8 @@ Template.header.events({
 Template.header.rendered = function() {
 
     pageRendered = true;
+
+    getStreamURL();
 
     // $('#control_1').on('input change', function(){
     //      // console.log(this.value);

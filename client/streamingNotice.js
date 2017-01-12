@@ -1,7 +1,9 @@
 var onNowPost = {};
 var upNextPost = {};
 var lastEpPost = {};
-// isOnNowExist = false;
+var isOnNowExist = false;
+var isUpNextExist = false;
+var isLastEpExist = false;
 
 var checkStreamingStatusInterval = false;
 
@@ -102,6 +104,7 @@ Template.streamingNotice.events({
 // };
 //
 Template.streamingNotice.rendered = function() {
+  // console.log("streamingNotice rendered");
   onNowPost = Posts.findOne({isOnNow: true});
   upNextPost = Posts.findOne({isUpNext: true});
   lastEpPost = Posts.findOne({isLastEp: true});

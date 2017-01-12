@@ -8,6 +8,6 @@ Template.registerHelper("isItCordova", function () {
 
 Template.registerHelper("getStreamReady", function() {
     var status = Session.get('streamReady');
-    // console.log("str is ready: " + status);
+    // console.log("globalHelper getStreamReady() - str is ready: " + status);
     return status;
 });
