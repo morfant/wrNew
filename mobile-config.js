@@ -1,7 +1,8 @@
 // This section sets up some basic app metadata,
 // the entire section is optional.
 App.info({
-  id: 'kr.weatherreport.www',
+  // id: 'kr.weatherreport.www',
+  id: 'kr.weathermusic.www',
   name: 'Transparent Music',
   version: "0.0.1",
   description: 'Listening app for the performance \'Transparent Music\'.',
