@@ -29,7 +29,9 @@ var checkStreamingStatus = function(){
     } else {
       console.log(error);
     }
-    // console.log("checkStreamingStatus() - streamReady : " + Session.get('streamReady'));
+    // var userId = Meteor.userId();
+    // if (userId) console.log("checkStreamingStatus() - streamReady : " + Session.get('streamReady'));
+    console.log("checkStreamingStatus() - streamReady : " + Session.get('streamReady'));
   });
 };
 

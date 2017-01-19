@@ -1,3 +1,5 @@
+Session.set('networkState', 'Unknown');
+
 Template.registerHelper("isItCordova", function () {
     if (Meteor.isCordova) {
       return true;
