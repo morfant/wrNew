@@ -4,7 +4,7 @@ App.info({
   // id: 'kr.weatherreport.www',
   id: 'kr.weathermusic.www',
   name: 'Transparent Music',
-  version: "0.0.2",
+  version: "0.0.3",
   description: 'Listening app for the performance \'Transparent Music\'.',
   author: 'teum11 + giy',
   email: 'giy.hands@gmail.com',
