@@ -11,7 +11,6 @@ Template.body.helpers({
     if (data.count()){
       var bgUrl = BackgroundImageURL.findOne().bgImgURL.url;
       var bgUrlTag = 'url(' + bgUrl + ')';
-      // var bgUrlTag = 'url(\'' + bgUrl + '\')';
       bgUrlObj = {};
       bgUrlObj['background-image'] = bgUrlTag;
       // console.log(bgUrlObj);

@@ -125,7 +125,6 @@ Template.streamingNotice.rendered = function() {
     DocHead.addMeta(metaInfo);
   }
 
-
   // Try repeatedly auto connect and retry
   // checkStreamingStatus = Meteor.setInterval(function () {
   //   // console.log("checkStreamingOn - interval");

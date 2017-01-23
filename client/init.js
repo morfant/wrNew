@@ -6,5 +6,5 @@
 // console.log("isCordovaApp: " + isCordovaApp);
 
 Meteor.startup(function() {
-  Uploader.uploadUrl = Meteor.absoluteUrl("upload"); // Cordova needs absolute URL
+  // Uploader.uploadUrl = Meteor.absoluteUrl("upload"); // Cordova needs absolute URL
 });
