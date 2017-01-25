@@ -4,7 +4,7 @@
 var checkerInterval = false;
 var loading_timer = null;
 
-var checkNetworkState = function() {
+checkNetworkState = function() {
   console.log("checkNetworkState()");
   var networkState = navigator.connection.type;
   var states = {};
@@ -17,7 +17,7 @@ var checkNetworkState = function() {
   states[Connection.CELL]     = 'Cell_generic';
   states[Connection.NONE]     = 'None';
 
-  // console.log('Connection type: ' + states[networkState]);
+  console.log('Connection type: ' + states[networkState]);
   // return networkState;
   Session.set('networkState', states[networkState]);
 };

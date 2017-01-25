@@ -2,6 +2,8 @@ var pageRendered = false;
 
 Template.header.created = function() {
     pageRendered = false
+    Session.set('audioIsLoading', true);
+    Session.set('playbuttonClicked', false);
 };
 
 var getStreamURL = function() {
@@ -11,12 +13,17 @@ var getStreamURL = function() {
     if (dataExist) {
         var url = data.fetch()[0].streamURL.url;
         // console.log(url);
-        var src = document.getElementById('audioSource');
-        src.src = url;
+        var audio = document.getElementById('audio');
+        var audioSrc = document.getElementById('audioSource');
+        audioSrc.src = url;
 
         // preload
         audio.load();
         document.getElementById('audio').paused = true;
+        audio.oncanplay = function() {
+          Session.set('audioIsLoading', false);
+          // console.log(Session.get('audioIsLoading'));
+        }
         // document.getElementById('audio').muted = false;
     }
 }
@@ -58,10 +65,16 @@ Template.header.helpers({
 
         return active && 'active';
     },
+    audioIsLoading: function() {
+      return Session.get('audioIsLoading');
+    },
+    playbuttonClicked: function() {
+      return Session.get('playbuttonClicked');
+    },
     autoPlay: function() {
         // console.log(Session.get('streamReady'));
+        // var audio = document.getElementById('audio');
         if (pageRendered){
-            var audio = document.getElementById('audio');
             var strRdy = Session.get('streamReady');
             if (strRdy == true) {
                 // playButton.src = "/images/big_play.jpg";
@@ -81,30 +94,65 @@ Template.header.helpers({
 
 Template.header.events({
     'click #playbutton': function(e) {
-        console.log("playbutton click");
-        var audio = document.getElementById('audio');
-        var audioSrc = document.getElementById('audioSource');
-        console.log("audioSrc: " + audioSrc.src);
+      // if(Meteor.isCordova){
+        // console.log("Cordova");
         var isStreamReady = Session.get('streamReady');
-        if (audio.paused && isStreamReady){
-          audio.play();
-          // Change element id, image 'playbutton -> pausebutton'
-          var button = document.getElementById('playbutton');
-          button.src = "/images/big_pause.jpg";
-          button.id = 'pausebutton';
-        }
+        // console.log("isStreamReady: " + isStreamReady);
 
+        if (isStreamReady && !Session.get('playbuttonClicked')){
+          // console.log('Cordova - playbuttonClicked');
+          Session.set('playbuttonClicked', true);
+          var audio = document.getElementById('audio');
+          var audioSrc = document.getElementById('audioSource');
+          // console.log("audioSrc: " + audioSrc.src);
+
+          if (!Session.get('audioIsLoading')) {
+            audio.play();
+            var button = document.getElementById('playbutton');
+            button.src = "/images/big_pause.jpg";
+            button.id = 'pausebutton';
+          } else {
+            audio.load();
+            audio.onloadeddata = function() {
+              Session.set('audioIsLoading', false);
+              audio.play();
+              var button = document.getElementById('playbutton');
+              button.src = "/images/big_pause.jpg";
+              button.id = 'pausebutton';
+            }
+          }
+        }
+      // } else {
+      //   // console.log("web page");
+      //   var audio = document.getElementById('audio');
+      //   // var audioSrc = document.getElementById('audioSource');
+      //   // console.log("audioSrc: " + audioSrc.src);
+      //   var isStreamReady = Session.get('streamReady');
+      //   if (audio.paused && isStreamReady){
+      //     audio.play();
+      //     // Change element id, image 'playbutton -> pausebutton'
+      //     var button = document.getElementById('playbutton');
+      //     button.src = "/images/big_pause.jpg";
+      //     button.id = 'pausebutton';
+      //   }
+      //
+      // }
     },
     'click #pausebutton': function(e) {
-        console.log("pausebutton click");
-        var audio = document.getElementById('audio');
-        if (!audio.paused){
-          audio.pause();
-          // Change element id, image 'pausebutton -> playbutton'
-          var button = document.getElementById('pausebutton');
-          button.src = "/images/big_play.jpg";
-          button.id = 'playbutton';
-        }
+
+      var audio = document.getElementById('audio');
+      if (!audio.paused){
+        audio.pause();
+      }
+
+      Session.set('playbuttonClicked', false);
+      Session.set('audioIsLoading', true);
+
+      // Change element id, image 'pausebutton -> playbutton'
+      var button = document.getElementById('pausebutton');
+      // console.log("change to pausebutton");
+      button.src = "/images/big_play.jpg";
+      button.id = 'playbutton';
 
     }
 });
@@ -114,6 +162,7 @@ Template.header.events({
 
 Template.header.rendered = function() {
 
+    audio = document.getElementById('audio');
     pageRendered = true;
 
     getStreamURL();

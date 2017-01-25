@@ -31,6 +31,15 @@
       </div>
 
 
+      <!-- {{#if isItCordova}} -->
+        {{#if audioIsLoading}}
+          {{#if playbuttonClicked}}
+            {{>spinner}}
+          {{/if}}
+        {{/if}}
+      <!-- {{/if}} -->
+
+
       <div class="collapse navbar-collapse" id="navigation">
         <ul class="nav navbar-nav">
           {{#if currentUser}}<li><a href="{{pathFor 'streamingNotice'}}">Live</a></li>{{/if}}
