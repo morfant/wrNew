@@ -1,10 +1,38 @@
+/*
+<TransparentMusic release log>
+
+playstore / appstore
+0.0.2 / 1.0
+
+- 앱 시작시 스마트 디바이스의 인터넷 가능 여부 및 원격 서버와의 연결 상태를 체크하여, 사용자에게 각 경우에 해당하는 정보를 제공한다.
+- 앱 실행 후 위의 조건이 변경되면 자동으로 연결에 적용한다.
+
+
+- Check internet availability of smart device and connection status with remote server when starting the app and provides information corresponding to each case to the user.
+- If the above conditions are changed after the app is launched, it is automatically applied to the connection.
+
+——————————————————————————————————————————————————
+2017.01.26
+playstore / appstore
+3(0.0.4) / 1.1(0.0.4)
+
+- 디자인 요소 변경
+- 안정적 스트리밍 재생을 위한 개선 : 재생 전 스트리밍 오디오를 불러옴
+- 자동 스트리밍 상태 확인 시간 변경 : 10초 -> 5초
+
+- Design elements changed.
+- Improved for stable streaming playback: Load streaming audio before playback.
+- Automatic streaming status check time: 10 seconds -> 5 seconds
+*/
+
+
 // This section sets up some basic app metadata,
 // the entire section is optional.
 App.info({
   // id: 'kr.weatherreport.www',
   id: 'kr.weathermusic.www',
   name: 'Transparent Music',
-  version: "0.0.3",
+  version: "0.0.4",
   description: 'Listening app for the performance \'Transparent Music\'.',
   author: 'teum11 + giy',
   email: 'giy.hands@gmail.com',

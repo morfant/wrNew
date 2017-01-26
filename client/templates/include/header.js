@@ -114,6 +114,7 @@ Template.header.events({
           } else {
             audio.load();
             audio.onloadeddata = function() {
+            // audio.oncanplay = function() {
               Session.set('audioIsLoading', false);
               audio.play();
               var button = document.getElementById('playbutton');
