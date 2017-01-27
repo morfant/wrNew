@@ -12,6 +12,7 @@
           </button>
         {{/unless}}
         <audio id="audio">
+        <!-- <audio id="audio" crossOrigin="anonymous"> -->
           <!-- get stream source url from db reactively -->
           {{getStreamSrc}}
           <source id="audioSource" src="" type="audio/mpeg" />
@@ -38,6 +39,8 @@
           {{/if}}
         {{/if}}
       <!-- {{/if}} -->
+
+      <!-- {{>audioMeter}} -->
 
 
       <div class="collapse navbar-collapse" id="navigation">

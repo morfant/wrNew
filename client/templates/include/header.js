@@ -155,7 +155,8 @@ Template.header.events({
       button.src = "/images/big_play.jpg";
       button.id = 'playbutton';
 
-    }
+    },
+
 });
 
 
@@ -167,17 +168,4 @@ Template.header.rendered = function() {
     pageRendered = true;
 
     getStreamURL();
-
-    // $('#control_1').on('input change', function(){
-    //      // console.log(this.value);
-    //     var audio = document.getElementById('audio');
-    //     audio.volume = this.value;
-    // });
-
-    // $('#control_2').on('input change', function(){
-    //      // console.log(this.value);
-    //     var audio = document.getElementById('audio2');
-    //     audio.volume = this.value;
-    // });
-
 };
