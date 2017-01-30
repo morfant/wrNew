@@ -296,5 +296,26 @@ progress {
 /* cordova */
 .cordovaOnlyText {
   font-size: 15px;
+}
 
+
+
+.playing {
+  display: inline;
+  position: absolute;;
+  /*text-align: center;*/
+  /*right: 50%;*/
+
+  /*margin-right: 200px;*/
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 30%;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

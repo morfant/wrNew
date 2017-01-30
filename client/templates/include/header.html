@@ -1,7 +1,6 @@
 <template name="header">
   <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid height-full">
-
       <div class="navbar-header">
         {{#unless isItCordova}}
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
@@ -33,9 +32,11 @@
 
 
       <!-- {{#if isItCordova}} -->
-        {{#if audioIsLoading}}
-          {{#if playbuttonClicked}}
+        {{#if playbuttonClicked}}
+          {{#if audioIsLoading}}
             {{>spinner}}
+          {{else}}
+            {{>playingAnimation}}
           {{/if}}
         {{/if}}
       <!-- {{/if}} -->
@@ -58,6 +59,9 @@
           <li><a class="_playbutton" href=""><b>
             {{{getPlaybarNotice}}}
           </b></a></li>
+
+          <!-- <li> {{>playingAnimation}} </li> -->
+
           <!-- {{/unless}} -->
 
           <!-- {{autoPlay}} -->
