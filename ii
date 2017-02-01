@@ -1,0 +1,2 @@
+echo "meteor run ios-device"
+meteor run ios-device

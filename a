@@ -1,0 +1,2 @@
+echo "meteor run android-device --mobile-server weatherreport.kr"
+meteor run android-device --mobile-server weatherreport.kr

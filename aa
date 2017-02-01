@@ -1,0 +1,2 @@
+echo "meteor run android-device"
+meteor run android-device
