@@ -28,8 +28,9 @@
           <a href=""><img id="playbutton" src="/images/big_play_gray.png" height="55" width="50"></a>
         {{/if}}
         <!-- <a href=""><img class="pausebutton" src="/images/big_pause.jpg" height="70" width="70"></a> -->
-      </div>
 
+        <canvas class="Absolute-Center" id="my-canvas" width="200" height="50"></canvas>
+      </div>
 
       <!-- {{#if isItCordova}} -->
         {{#if playbuttonClicked}}
@@ -43,17 +44,18 @@
 
       <!-- {{>audioMeter}} -->
 
-      <p><canvas id="my-canvas" width="300" height="20"></canvas></p>
 
 
-      <div class="buffered">
+      <!-- <div class="buffered">
         <span id="buffered-amount"></span>
       </div>
       <div class="progress">
         <p id="time"></p>
         <span id="progress-amount"></span>
       </div>
+ -->
 
+      <!-- {{#unless isItCordova}} -->
       <div class="collapse navbar-collapse" id="navigation">
         <ul class="nav navbar-nav">
           {{#if currentUser}}<li><a href="{{pathFor 'streamingNotice'}}">Live</a></li>{{/if}}
@@ -76,8 +78,8 @@
 
           <!-- {{autoPlay}} -->
         </ul>
-
       </div>
+      <!-- {{/unless}} -->
     </div>
   </nav>
 </template>

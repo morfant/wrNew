@@ -321,32 +321,12 @@ progress {
 }
 
 
-
-
-.buffered {
-  height: 20px;
-  position: relative;
-  background: #555;
-  width: 300px;
+#my-canvas {
+  display: inline-block;
 }
-
-#buffered-amount {
-  display: block;
-  height: 100%;
-  background-color: #000;
-  width: 0;
-}
-
-.progress {
-  margin-top: -20px;
-  height: 20px;
-  position: relative;
-  width: 300px;
-}
-
-#progress-amount {
-  display: block;
-  height: 100%;
-  background-color: #595;
-  width: 0;
+.Absolute-Center {
+  margin: auto;
+  /*margin-left: 50px;*/
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
 }

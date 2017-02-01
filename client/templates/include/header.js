@@ -5,6 +5,21 @@ Template.header.created = function() {
     Session.set('audioIsLoading', true);
     Session.set('playbuttonClicked', false);
     Session.set('bufferedLen', 0);
+
+
+    // if (Session.get('streamReady')) {
+    //   console.log("progress event added!");
+    //   // fired when data downloaded.
+    //   myAudio.addEventListener('progress', progressHandler(myAudio));
+    //
+    //   // fired when playing.
+    //   myAudio.addEventListener('timeupdate', timeupdateHandler(myAudio));
+    // } else {
+    //   console.log("progress event removed!");
+    //   myAudio.removeEventListener('progress', progressHandler);
+    //   myAudio.removeEventListener('timeupdate', timeupdateHandler);
+    // }
+    //
 };
 
 var getStreamURL = function() {
@@ -80,6 +95,7 @@ Template.header.helpers({
             if (strRdy == true) {
                 // playButton.src = "/images/big_play.jpg";
                 // console.log("play");
+                clearCanvas();
                 audio.load();
                 audio.oncanplay = function(){
                     audio.play();
@@ -92,12 +108,6 @@ Template.header.helpers({
     },
 });
 
-var ap = function() {
-  var myAudio = document.getElementById('audio');
-
-
-}
-
 var onCanPlayHandler = function() {
   // console.log("onCanPlayHandler()");
   Session.set('audioIsLoading', false);
@@ -109,11 +119,21 @@ var onCanPlayHandler = function() {
 
 
 Template.header.events({
+    'progress #audio': function(e) {
+      if (pageRendered){
+        var audio = document.getElementById('audio');
+        progressHandler(audio);
+      }
+    },
+    'timeupdate #audio': function(e) {
+      var audio = document.getElementById('audio');
+      timeupdateHandler(audio);
+    },
     'click #playbutton': function(e) {
       // if(Meteor.isCordova){
         // console.log("Cordova");
 
-          console.log('playbuttonClicked');
+        console.log('playbuttonClicked');
         // update streamReady status
         checkStreamingStatus();
         var isStreamReady = Session.get('streamReady');
@@ -137,6 +157,7 @@ Template.header.events({
             audio.play();
             // checkBufferStatus();
           } else {
+            clearCanvas();
             audio.load();
             audio.addEventListener("canplay", onCanPlayHandler);
           }
@@ -179,29 +200,75 @@ Template.header.events({
 
 });
 
+// playing animation
+var playing = function(_idx) {
+  // console.log("playing()");
+  var canvas = document.getElementById("my-canvas");
+  var ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  var cx = canvas.width/2;
+  var cy = canvas.height/2;
+  var r = 5 * _idx;
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, 2*Math.PI);
+  // ctx.stroke();
+  ctx.fill();
+}
 
-var progressHandler = function(myAudio) {
-    // myAudio.addEventListener('timeupdate', function() {
+var idx = 0;
+var clearCanvas = function(){
+  idx = 0;
+  var canvas = document.getElementById("my-canvas");
+  var ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+var prevIdx = 0;
+var timeupdateHandler = function(myAudio) {
+    var curIdx = Math.round(myAudio.currentTime);
+    if (Session.get('streamReady')){
+      if (curIdx != prevIdx) {
+        playing(idx % 9);
+        idx++;
+        prevIdx = curIdx;
+      }
+    } else {
+      clearCanvas();
+    }
+
+    // var prev_bufferedLen = Session.get('bufferedLen');
+    // var bufferedIdx = 0;
+    // var bufferedEnd = myAudio.buffered.end(bufferedIdx);
+    // Session.set('bufferedLen', bufferedEnd - currentTime);
+    // console.log(Session.get('bufferedLen'));
+    // return idx;
+}
+
+var progressHandler = function(_myAudio) {
     // console.log("progress()");
-    // var bufferedIdx = myAudio.buffered.length - 1;
-    var bufferedIdx = 0;
-    var bufferedEnd = myAudio.buffered.end(bufferedIdx);
-    // var bufferedStart = myAudio.buffered.start(bufferedIdx);
-    var currentTime = myAudio.currentTime;
-    var bufferedLen = bufferedEnd - currentTime;
+    var bufferedIdx = myAudio.buffered.length - 1;
+    if (bufferedIdx >= 0) {
+      var bufferedEnd = _myAudio.buffered.end(bufferedIdx);
+      var currentTime = _myAudio.currentTime;
+      var bufferedLen = bufferedEnd - currentTime;
 
-    Session.set('bufferedLen', bufferedLen);
-    Session.set('audioIsLoading', false);
-    if (bufferedLen < 0.01) {
+      // update bufferedLen, whether audio loading is needed.
+      Session.set('bufferedLen', bufferedLen);
+      Session.set('audioIsLoading', false);
+
+      if (bufferedLen < 0.01) {
+        console.log("Buffer underrun!!!!");
         Session.set('audioIsLoading', true);
 
         checkStreamingStatus();
         var isStreamReady = Session.get('streamReady');
 
         if (isStreamReady) {
-          myAudio.load();
-          myAudio.addEventListener("canplay", onCanPlayHandler);
+          clearCanvas();
+          _myAudio.load();
+          _myAudio.addEventListener("canplay", onCanPlayHandler);
         }
+      }
     }
     // console.log("bufferedLen: " + bufferedLen);
     // document.getElementById('progress-amount').style.width = ((bufferedLen / duration)*100) + "%";
@@ -215,23 +282,5 @@ Template.header.rendered = function() {
     pageRendered = true;
     getStreamURL();
 
-    if (Session.get(streamReady)) {
-      console.log("progress event added!");
-  // fired when data downloaded.
-      myAudio.addEventListener('progress', function() {
-
-      });
-
-
-    }
-
-        // fired when playing.
-    myAudio.addEventListener('timeupdate', function() {
-      // console.log("timeupdate()");
-      var currentTime = Math.round(myAudio.currentTime);
-      var idx = currentTime % 5;
-      // console.log("idx: " + idx);
-      return idx;
-    });
 
 };
