@@ -36,13 +36,23 @@
           {{#if audioIsLoading}}
             {{>spinner}}
           {{else}}
-            {{>playingAnimation}}
+            <!-- {{>playingAnimation}} -->
           {{/if}}
         {{/if}}
       <!-- {{/if}} -->
 
       <!-- {{>audioMeter}} -->
 
+      <p><canvas id="my-canvas" width="300" height="20"></canvas></p>
+
+
+      <div class="buffered">
+        <span id="buffered-amount"></span>
+      </div>
+      <div class="progress">
+        <p id="time"></p>
+        <span id="progress-amount"></span>
+      </div>
 
       <div class="collapse navbar-collapse" id="navigation">
         <ul class="nav navbar-nav">
