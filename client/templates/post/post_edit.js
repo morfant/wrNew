@@ -8,7 +8,19 @@ Template.postEdit.helpers({
   },
   errorClass: function (field) {
     return !!Session.get('postEditErrors')[field] ? 'has-error' : '';
+  },
+
+    //  reverse - title: $(e.target).find('[name=title]').val().replace(/[\r\n]/g, "<br />") - in submit.
+  htmlToText: function (field) {
+    //   console.log("htmlToText()");
+    //   console.log(this.title);
+    //   console.log(this.notice);
+    //   console.log(this.text);
+      wrappedText = this[field].replace(/\<br \/\>/gi, '\n'); //gi means 'global', 'case insensitive'
+    //   console.log(wrappedText);
+      return wrappedText;
   }
+
 });
 
 Template.postEdit.events({
@@ -18,13 +30,17 @@ Template.postEdit.events({
     var currentPostId = this._id;
 
     var postProperties = {
-      title: $(e.target).find('[name=title]').val(),
-      notice: $(e.target).find('[name=notice]').val(),
-      text: $(e.target).find('[name=text]').val()
+
+      title: $(e.target).find('[name=title]').val().replace(/[\r\n]/g, "<br />"),
+      notice: $(e.target).find('[name=notice]').val().replace(/[\r\n]/g, "<br />"),
+      text: $(e.target).find('[name=content]').val().replace(/[\r\n]/g, "<br />"),
+    //   title: $(e.target).find('[name=title]').val(),
+    //   notice: $(e.target).find('[name=notice]').val(),
+    //   text: $(e.target).find('[name=content]').val()
     }
 
     var errors = validatePost(postProperties);
-    if (errors.title || errors.text)
+    if (errors.title || errors.content)
       return Session.set('postEditErrors', errors);
 
     Posts.update(currentPostId, {$set: postProperties}, function(error) {

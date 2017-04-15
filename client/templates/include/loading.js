@@ -88,7 +88,7 @@ Template.loading.rendered = function() {
 };
 
 Template.loading.destroyed = function () {
-  console.log("loading.html - destroyed");
+  // console.log("loading.html - destroyed");
   if (Meteor.isCordova){
     if (checkerInterval) Meteor.clearInterval(checkerInterval);
     // clearTimeout(loading_timer);

@@ -5,6 +5,7 @@ Template.postSubmit.created = function() {
 
   randomKey = Random.id();
   // console.log("in postsubmit.created(): " + randomKey);
+
 };
 
 
@@ -37,25 +38,27 @@ Template.postSubmit.events({
   'submit form': function(e) {
     e.preventDefault();
 
-    console.log($(e.target).find('#text').html());
-
     var post = {
       title: $(e.target).find('[name=title]').val().replace(/[\r\n]/g, "<br />"),
       notice: $(e.target).find('[name=notice]').val().replace(/[\r\n]/g, "<br />"),
-      // text: $(e.target).find('[name=text]').val().replace(/[\r\n]/g, "<br />"),
-      text: $(e.target).find('[name=text]').html(),
+      text: $(e.target).find('[name=content]').val().replace(/[\r\n]/g, "<br />"),
+    //   text: $(e.target).find('[name=content]').html(),
       imgId: randomKey
     };
 
+    console.log("post: " + post.title);
+    console.log("post: " + post.notice);
+    console.log("post: " + post.content);
+
     var errors = validatePost(post);
-    if (errors.title || errors.text)
+    if (errors.title || errors.content)
       return Session.set('postSubmitErrors', errors);
 
     Meteor.call('postInsert', post, function(error, result) {
       // display the error to the user and abort
       if (error)
         return throwError(error.reason);
-      
+
       Router.go('postPage', {_id: result._id});
 
     });
