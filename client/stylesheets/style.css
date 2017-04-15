@@ -325,3 +325,14 @@ progress {
 #content {
     resize: none;
 }
+
+#my-canvas {
+  display: inline-block;
+}
+
+.Absolute-Center {
+  margin: auto;
+  /*margin-left: 50px;*/
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
