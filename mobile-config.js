@@ -98,7 +98,8 @@ App.setPreference('SuppressesIncrementalRendering', true);
 // });
 
 App.configurePlugin('phonegap-plugin-push', {
-  SENDER_ID: 53132223643
+  // SENDER_ID: 53132223643
+  SENDER_ID: 83935934941 // for test
 });
 
 
