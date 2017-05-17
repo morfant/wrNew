@@ -4,7 +4,6 @@
     <div class="form-group">
       <label class="control-label" for="pushManager">Push manager<span id="pushManager"></span></label>
 
-        <!-- <div class="form-group"> -->
         <div class="controls">
           <label class="" for="pushTitle">title</label>&nbsp;
           <input type="text" class="form-control" id="pushTitle">
@@ -12,13 +11,28 @@
               <!-- <span class="help-block">{{errorMessage 'pushManager'}}</span> -->
         </div>
 
-        <!-- <div class="form-group"> -->
         <div class="controls">
           <label class="" for="pushContent">content</label>&nbsp;
           <input type="text" class="form-control" id="pushContent">
           <span class="help-block"></span>
               <!-- <span class="help-block">{{errorMessage 'pushManager'}}</span> -->
         </div>
+
+        <div class="controls">
+          <label class="" for="pushPictureURL">pictureURL</label>&nbsp;
+          <input type="text" class="form-control" id="pushPictureURL"
+          placeholder="ex) https://drive.google.com/uc?export=view&id=0B5O0D-88dhuVZ19adXg3LWV3cWM"/>
+          <span class="help-block"></span>
+              <!-- <span class="help-block">{{errorMessage 'pushManager'}}</span> -->
+        </div>
+
+        <div class="controls">
+          <label class="" for="pushSummaryText">summaryText</label>&nbsp;
+          <input type="text" class="form-control" id="pushSummaryText">
+          <span class="help-block"></span>
+              <!-- <span class="help-block">{{errorMessage 'pushManager'}}</span> -->
+        </div>
+
     </div>
     <br />
     <input type="submit" value="Send" class="btn btn-primary"/>
