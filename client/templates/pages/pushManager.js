@@ -18,8 +18,8 @@ Template.pushManager.events({
     var summaryText = $(e.target).find('#pushSummaryText').val()
     // console.log(title);
     // console.log(content);
-    console.log(pictureURL);
-    console.log(summaryText);
+    // console.log(pictureURL);
+    // console.log(summaryText);
 
     if (confirm("이대로 push 메시지를 발송하시겠습니까?") == true){
         Meteor.call('sendPush', title, content, pictureURL, summaryText, function(error, result) {
