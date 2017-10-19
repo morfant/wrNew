@@ -6,7 +6,7 @@
 
   {{#if getStreamReady}}
     {{#unless isItCordova}}
-      {{> chatAndGo}}
+      <!-- {{> chatAndGo}} -->
     {{/unless}}
   {{/if}}
 
@@ -16,7 +16,7 @@
     {{#if onNowExist}}
       <div class="onNow">
         <article class="streamList">
-          <h3>Now</h3>
+          <!-- <h3>Now</h3> -->
             <p class="noticeTitle">{{{onNowTitle}}}</p>
             <p class="noticeContent">{{{onNowText}}}</p>
             <!-- <img src="/articlePic/onNow.png" height="300" width="600"> -->
@@ -32,7 +32,7 @@
     {{#if upNextExist}}
       <div class="upNext">
         <article class="streamList">
-          <h3><b>Next</b></h3>
+          <!-- <h3><b>Next</b></h3> -->
             <p class="noticeTitle">{{{upNextTitle}}}</p>
             <p class="noticeContent">{{{upNextText}}}</p>
             <!-- <img src="/articlePic/upNext.png" height="300" width="600"> -->
@@ -46,7 +46,7 @@
 
     {{#if lastEpExist}}
       <div class="lastEps">
-        <h3><b>Last Episodes</b></h3>
+        <!-- <h3><b>Last Episodes</b></h3> -->
 
         {{#each lastEps}}
         <article class="streamList">
