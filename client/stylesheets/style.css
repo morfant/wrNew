@@ -71,7 +71,8 @@ body {
     margin: 7px 12px 0 0;
     float: left; }
   .post .post-content {
-    float: left; }
+    float: left;
+  }
     .post .post-content h3 {
       margin: 0;
       line-height: 1.4;
@@ -224,7 +225,7 @@ body#background {
   font-size: 25px;
 }
 .noticeContent {
-  font-size: 16px;
+  font-size: 20px;
 }
 .desktop-progress {
 
