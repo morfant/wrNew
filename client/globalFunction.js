@@ -1,3 +1,15 @@
+googleDriveConvertPrefix = "https://drive.google.com/uc?export=view&id=";
+
+convertGDlink = function(link){
+    if (link != "") {
+        return googleDriveConvertPrefix + link.split("id=")[1];
+    } else {
+        return "";
+    }
+}
+
+
+
 checkStreamingStatus = function(){
   var url = getStreamURL();
   Meteor.call('checkStreamingOn', url, function(error, result) {

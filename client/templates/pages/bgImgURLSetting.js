@@ -24,7 +24,7 @@ Template.bgImgURLSetting.events({
     e.preventDefault();
 
     var bgImgUrl = {
-      url: $(e.target).find('[name=bgImgURL]').val()
+      url: convertGDlink($(e.target).find('[name=bgImgURL]').val())
     };
 
     // console.log(bgImgUrl);
