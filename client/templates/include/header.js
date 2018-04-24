@@ -46,20 +46,20 @@ var getStreamURL = function() {
 
 Template.header.helpers({
     getPlaybarNotice: function() {
-        console.log("getPlaybarNotice()");
+        // console.log("getPlaybarNotice()");
         var postOnNow = Posts.find({isOnNow: true}).count(); //reactive
         var postUpNext = Posts.find({isUpNext: true}).count(); //reactive
 
         if (postOnNow){
-            console.log("isOnNow");
+            // console.log("isOnNow");
             var post = Posts.findOne({isOnNow: true});
-            console.log(post.notice);
+            // console.log(post.notice);
             return post.notice;
         };
         if (postUpNext){
-            console.log("isUpNext");
+            // console.log("isUpNext");
             var post = Posts.findOne({isUpNext: true});
-            console.log(post.notice);
+            // console.log(post.notice);
             return post.notice;
         };
     },
@@ -133,7 +133,7 @@ Template.header.events({
       // if(Meteor.isCordova){
         // console.log("Cordova");
 
-        console.log('playbuttonClicked');
+        // console.log('playbuttonClicked');
         // update streamReady status
         checkStreamingStatus();
         var isStreamReady = Session.get('streamReady');
@@ -180,7 +180,7 @@ Template.header.events({
       // }
     },
     'click #pausebutton': function(e) {
-      console.log("pausebutton clicked");
+      // console.log("pausebutton clicked");
       var audio = document.getElementById('audio');
       Session.set('playbuttonClicked', false);
       Session.set('audioIsLoading', true);
