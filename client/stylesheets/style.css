@@ -194,12 +194,26 @@ body {
     left: 800px;
     height: 10px;
 }
+
 .articles{
+  /* font-family: 'Jeju Myeongjo', serif; */
   font-family: 'Open Sans', sans-serif;
   color: #ffffff;
   padding-left: 15px;
   padding-right: 15px;
 }
+
+.articles a {
+  color: rgb(255, 255, 255);
+  text-decoration: underline;
+}
+
+.articles a:hover {
+  /* color: lightskyblue; */
+  text-decoration: none;
+}
+
+
 .container-fluid{
     background-color: #ffffff;
     opacity: 0.5;
@@ -225,9 +239,11 @@ body#background {
 .noticeTitle{
   font-size: 25px;
 }
+
 .noticeContent {
   font-size: 20px;
 }
+
 .desktop-progress {
 
 }
@@ -259,7 +275,7 @@ progress {
 
 .fc-event .fc-content {
     color: #444;
-  }
+}
 
 .fc-event h4,h5 {
   margin: 0;
@@ -340,17 +356,42 @@ progress {
 }
 
 
-/* for 2018. 5 soundcamp */
-.articles {
-  /* font-family: 'Jeju Myeongjo', serif; */
-}
-
-.articles a {
-  color: rgb(255, 255, 255);
+.nav-tags a {
+  font-size: 14px;
   text-decoration: underline;
+  /* padding-left: 3px; */
 }
 
-.articles a:hover {
-  /* color: lightskyblue; */
-  text-decoration: none;
+#mainTitle {
+  margin-bottom: 0px;
+}
+
+#team-desc {
+  font-style: italic;
+  /* padding-left: 3px; */
+  margin-bottom: 20px;
+}
+
+#footer-col-2 {
+  text-align: center;
+  margin-bottom: 0px;
+
+}
+
+
+@media(max-width:768px) {
+
+  .noticeContent {
+    font-size: 14px;
+    /* text-align: justify; */
+  }
+
+  .articles {
+    padding: 0px 5px;
+  }
+
+}
+
+@media(min-width:769px) {
+
 }

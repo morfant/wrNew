@@ -46,20 +46,20 @@ var getStreamURL = function() {
 
 Template.header.helpers({
     getPlaybarNotice: function() {
-        // console.log("getPlaybarNotice()");
+        console.log("getPlaybarNotice()");
         var postOnNow = Posts.find({isOnNow: true}).count(); //reactive
         var postUpNext = Posts.find({isUpNext: true}).count(); //reactive
 
         if (postOnNow){
-            // console.log("isOnNow");
+            console.log("isOnNow");
             var post = Posts.findOne({isOnNow: true});
-            // console.log(post.notice);
+            console.log(post.notice);
             return post.notice;
         };
         if (postUpNext){
-            // console.log("isUpNext");
+            console.log("isUpNext");
             var post = Posts.findOne({isUpNext: true});
-            // console.log(post.notice);
+            console.log(post.notice);
             return post.notice;
         };
     },

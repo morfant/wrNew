@@ -3,12 +3,14 @@
     <div class="container-fluid height-full">
       <div class="navbar-header">
         {{#unless isItCordova}}
+          {{#if currentUser}}
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          {{/if}}
         {{/unless}}
         <audio id="audio">
         <!-- <audio id="audio" crossOrigin="anonymous"> -->
@@ -46,16 +48,7 @@
 
 
 
-      <!-- <div class="buffered">
-        <span id="buffered-amount"></span>
-      </div>
-      <div class="progress">
-        <p id="time"></p>
-        <span id="progress-amount"></span>
-      </div>
- -->
-
-      <!-- {{#unless isItCordova}} -->
+     <!-- {{#unless isItCordova}} -->
       <div class="collapse navbar-collapse" id="navigation">
         <ul class="nav navbar-nav">
           {{#if currentUser}}<li><a href="{{pathFor 'streamingNotice'}}">Live</a></li>{{/if}}
@@ -63,14 +56,17 @@
           {{#if currentUser}}<li><a href="{{pathFor 'postSubmit'}}">Submit</a></li>{{/if}}
           {{#if currentUser}}<li><a href="{{pathFor 'settings'}}">Setting</a></li>{{/if}}
 
+          <!-- <li><a href="{{pathFor 'streamingNotice'}}">Live</a></li>
+          <li><a href="{{pathFor 'postsList'}}">List</a></li>
+          <li><a href="{{pathFor 'postSubmit'}}">Submit</a></li>
+          <li><a href="{{pathFor 'settings'}}">Setting</a></li> -->
+          
+          <li class="tt"><a class="_playbutton" href=""><b>{{{getPlaybarNotice}}}</b></a></li>
          <!--  {{#if currentUser}}<li><a href="{{pathFor 'streamURLSetting'}}">streamSet</a></li>{{/if}}
           {{#if currentUser}}<li><a href="{{pathFor 'bgImgURLSetting'}}">bgImgSet</a></li>{{/if}}
           {{#if currentUser}}<li><a href="{{pathFor 'recScript'}}">recOnServer</a></li>{{/if}} -->
 
           <!-- {{#unless getOnNowExist}} -->
-          <li><a class="_playbutton" href=""><b>
-            {{{getPlaybarNotice}}}
-          </b></a></li>
 
           <!-- <li> {{>playingAnimation}} </li> -->
 
