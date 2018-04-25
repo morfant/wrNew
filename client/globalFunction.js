@@ -1,3 +1,4 @@
+googleDriveOrdinaryPrefix = "https://drive.google.com/open?id=";
 googleDriveConvertPrefix = "https://drive.google.com/uc?export=view&id=";
 
 convertGDlink = function(link){

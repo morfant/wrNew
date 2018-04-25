@@ -23,8 +23,15 @@ Template.bgImgURLSetting.events({
     // console.log("click submit");
     e.preventDefault();
 
+    var _url = $(e.target).find('[name=bgImgURL]').val();
+    var isGDlink = _url.includes(googleDriveOrdinaryPrefix);
+
+    if (isGDlink) {
+      _url = convertGDlink(_url);
+    }
+
     var bgImgUrl = {
-      url: convertGDlink($(e.target).find('[name=bgImgURL]').val())
+      url: _url
     };
 
     // console.log(bgImgUrl);

@@ -36,6 +36,11 @@ module.exports = {
 	      // MONGO_OPLOG_URL: 'mongodb://mongodb/local',
     },
 
+    volumes: {
+      // host : docker
+      '../host_Uploads': '/host_Uploads'
+    },
+
     docker: {
       // change to 'abernix/meteord:base' if your app is using Meteor 1.4 - 1.5
       image: 'abernix/meteord:node-8.9.4-base',
