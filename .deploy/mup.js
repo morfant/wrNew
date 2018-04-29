@@ -1,5 +1,6 @@
-var pass = require('./ps.js').password;
-var mongo_account = require('./ps.js').mongo_account;
+var _pass = require('./ps.js').password;
+var _port = require('./ps.js').port;
+var _mongo_account = require('./ps.js').mongo_account;
 
 
 module.exports = {
@@ -9,8 +10,8 @@ module.exports = {
       host: '211.110.229.78',
       username: 'root',
       // pem: './path/to/pem'
-      password: pass,
-      opts: {"port": 4120}
+      password: _pass,
+      opts: {"port": _port}
       // or neither for authenticate from ssh-agent
     }
   },
@@ -32,7 +33,7 @@ module.exports = {
       // TODO: Change to your app's url
       // If you are using ssl, it needs to start with https://
       ROOT_URL: 'http://weatherreort.kr',
-      MONGO_URL: mongo_account, 
+      MONGO_URL: _mongo_account, 
 	      // MONGO_OPLOG_URL: 'mongodb://mongodb/local',
     },
 
