@@ -38,7 +38,7 @@ module.exports = {
 
     volumes: {
       // host : docker
-      '../host_Uploads': '/host_Uploads'
+      'host_Uploads': '/host_Uploads'
     },
 
     docker: {

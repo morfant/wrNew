@@ -1,5 +1,5 @@
-forDeploy = true; // Make it TRUE when deploy to server.
-// forDeploy = false; // Make it FALSE when run on local, build for mobile app.
+// forDeploy = true; // Make it TRUE when deploy to server.
+forDeploy = false; // Make it FALSE when run on local, build for mobile app.
 if (Meteor.isCordova) { //Not working
   console.log("This is running Cordova!! Configured 'forDeploy' to be FALSE!!");
   forDeploy = false;

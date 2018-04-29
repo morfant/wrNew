@@ -1,1 +1,1 @@
-mup deploy
+mup deploy --verbose
