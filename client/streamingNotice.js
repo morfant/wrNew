@@ -58,11 +58,11 @@ Template.streamingNotice.helpers({
   startInterval: function() {
     if (checkStreamingStatusInterval) Meteor.clearInterval(checkStreamingStatusInterval);
     checkStreamingStatusInterval = Meteor.setInterval(checkStreamingStatus, CHECK_INTERVAL);
-    console.log("startInterval()");
+    // console.log("startInterval()");
   },
   stopInterval: function() {
     if (checkStreamingStatusInterval) Meteor.clearInterval(checkStreamingStatusInterval);
-    console.log("stopInterval()");
+    // console.log("stopInterval()");
   }
 
 });

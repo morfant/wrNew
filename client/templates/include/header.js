@@ -1,28 +1,17 @@
 var pageRendered = false;
+var playPosKeeper = null;
+var lastPlayTime = 0;
 
 Template.header.created = function() {
     pageRendered = false
     Session.set('audioIsLoading', true);
     Session.set('playbuttonClicked', false);
     Session.set('bufferedLen', 0);
-
-
-    // if (Session.get('streamReady')) {
-    //   console.log("progress event added!");
-    //   // fired when data downloaded.
-    //   myAudio.addEventListener('progress', progressHandler(myAudio));
-    //
-    //   // fired when playing.
-    //   myAudio.addEventListener('timeupdate', timeupdateHandler(myAudio));
-    // } else {
-    //   console.log("progress event removed!");
-    //   myAudio.removeEventListener('progress', progressHandler);
-    //   myAudio.removeEventListener('timeupdate', timeupdateHandler);
-    // }
-    //
 };
 
 var getStreamURL = function() {
+  // console.log("getStreamURL()");
+
     var data = StreamURL.find({}); //reactive
     var dataExist = data.count();
     // console.log(dataExist);
@@ -32,15 +21,26 @@ var getStreamURL = function() {
         var audio = document.getElementById('audio');
         var audioSrc = document.getElementById('audioSource');
         audioSrc.src = url;
-
-        // preload
-        audio.load();
-        document.getElementById('audio').paused = true;
         audio.oncanplay = function() {
           Session.set('audioIsLoading', false);
           // console.log(Session.get('audioIsLoading'));
         }
         // document.getElementById('audio').muted = false;
+
+        keepStartPos();
+    }
+}
+
+var keepStartPos = function() {
+    if (Session.get('streamReady')) {
+    // console.log("keepStartPos()");
+      if (playPosKeeper == null) {
+        // console.log("run playPosKeeper");
+        playPosKeeper = setInterval(function() {
+          lastPlayTime = lastPlayTime + 1;
+          // console.log(lastPlayTime);
+        }, 1000);
+      }
     }
 }
 
@@ -87,25 +87,25 @@ Template.header.helpers({
     playbuttonClicked: function() {
       return Session.get('playbuttonClicked');
     },
-    autoPlay: function() {
-        // console.log(Session.get('streamReady'));
-        // var audio = document.getElementById('audio');
-        if (pageRendered){
-            var strRdy = Session.get('streamReady');
-            if (strRdy == true) {
-                // playButton.src = "/images/big_play.jpg";
-                // console.log("play");
-                clearCanvas();
-                audio.load();
-                audio.oncanplay = function(){
-                    audio.play();
-                    var playButton = document.getElementById('playbutton');
-                    playButton.src = "/images/big_pause.jpg";
-                    playButton.id = 'pausebutton';
-                }
-            }
-        }
-    },
+    // autoPlay: function() {
+    //     // console.log(Session.get('streamReady'));
+    //     // var audio = document.getElementById('audio');
+    //     if (pageRendered){
+    //         var strRdy = Session.get('streamReady');
+    //         if (strRdy == true) {
+    //             // playButton.src = "/images/big_play.jpg";
+    //             // console.log("play");
+    //             clearCanvas();
+    //             audio.load();
+    //             audio.oncanplay = function(){
+    //                 audio.play();
+    //                 var playButton = document.getElementById('playbutton');
+    //                 playButton.src = "/images/big_pause.jpg";
+    //                 playButton.id = 'pausebutton';
+    //             }
+    //         }
+    //     }
+    // },
 });
 
 var onCanPlayHandler = function() {
@@ -119,6 +119,7 @@ var onCanPlayHandler = function() {
 
 
 Template.header.events({
+
     'progress #audio': function(e) {
       if (pageRendered){
         var audio = document.getElementById('audio');
@@ -130,18 +131,16 @@ Template.header.events({
       timeupdateHandler(audio);
     },
     'click #playbutton': function(e) {
-      // if(Meteor.isCordova){
-        // console.log("Cordova");
-
         // console.log('playbuttonClicked');
         // update streamReady status
         checkStreamingStatus();
         var isStreamReady = Session.get('streamReady');
 
         if (isStreamReady && !Session.get('playbuttonClicked')){
-          // console.log('Cordova - playbuttonClicked');
           Session.set('playbuttonClicked', true);
+
           var audio = document.getElementById('audio');
+          audio.loop = false;
           var audioSrc = document.getElementById('audioSource');
           // console.log("audioSrc: " + audioSrc.src);
 
@@ -150,34 +149,20 @@ Template.header.events({
           button.src = "/images/big_pause.jpg";
           button.id = 'pausebutton';
 
-          // console.log(Session.get('audioIsLoading'));
-          // console.log(Session.get('bufferedLen'));
+          if (playPosKeeper != null) {clearInterval(playPosKeeper); playPosKeeper = null;}
 
           if (!Session.get('audioIsLoading')) {
+            // console.log("audiois NOT loading");
+            audio.currentTime = lastPlayTime; // keep last played time 
             audio.play();
-            // checkBufferStatus();
           } else {
+            // console.log("audiois loading");
             clearCanvas();
             audio.load();
             audio.addEventListener("canplay", onCanPlayHandler);
           }
 
         }
-      // } else {
-      //   // console.log("web page");
-      //   var audio = document.getElementById('audio');
-      //   // var audioSrc = document.getElementById('audioSource');
-      //   // console.log("audioSrc: " + audioSrc.src);
-      //   var isStreamReady = Session.get('streamReady');
-      //   if (audio.paused && isStreamReady){
-      //     audio.play();
-      //     // Change element id, image 'playbutton -> pausebutton'
-      //     var button = document.getElementById('playbutton');
-      //     button.src = "/images/big_pause.jpg";
-      //     button.id = 'pausebutton';
-      //   }
-      //
-      // }
     },
     'click #pausebutton': function(e) {
       // console.log("pausebutton clicked");
@@ -188,6 +173,8 @@ Template.header.events({
 
       if (!audio.paused){
         audio.pause();
+        lastPlayTime = audio.currentTime;
+        playPosKeeper = setInterval(function() { lastPlayTime = lastPlayTime + 1; /* console.log(lastPlayTime); */}, 1000);
       }
 
       // Change element id, image 'pausebutton -> playbutton'
