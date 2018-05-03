@@ -379,7 +379,7 @@ progress {
 }
 
 
-@media(max-width:768px) {
+@media(max-width:767px) {
 
   .noticeContent {
     font-size: 14px;
@@ -390,8 +390,24 @@ progress {
     padding: 0px 5px;
   }
 
+  /* make fit embeded youtube video in mobile view */
+  .videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+  }
+  .videoWrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+  }
+
+
 }
 
-@media(min-width:769px) {
+@media(min-width:768px) {
 
 }
