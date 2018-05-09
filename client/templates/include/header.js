@@ -7,6 +7,7 @@ Template.header.created = function() {
     Session.set('audioIsLoading', true);
     Session.set('playbuttonClicked', false);
     Session.set('bufferedLen', 0);
+    Session.set('isLiveStream', false);
 };
 
 var getStreamURL = function() {
@@ -32,19 +33,35 @@ var getStreamURL = function() {
 }
 
 var keepStartPos = function() {
-    if (Session.get('streamReady')) {
-    // console.log("keepStartPos()");
+  if (Session.get('streamReady')) {
+
+    if (Session.get('isLiveStream') == true) {
+      console.log("sadf");
       if (playPosKeeper == null) {
-        // console.log("run playPosKeeper");
+        console.log("run playPosKeeper");
         playPosKeeper = setInterval(function() {
           lastPlayTime = lastPlayTime + 1;
-          // console.log(lastPlayTime);
+          console.log(lastPlayTime);
         }, 1000);
       }
+    } else {
+        console.log("NOT run playPosKeeper");
+      if (playPosKeeper != null) {
+        console.log("slkdhaosadf");
+        clearInterval(playPosKeeper);
+        playPosKeeper = null;
+      }
     }
+  }
 }
+  
 
 Template.header.helpers({
+  // getDuration: function() {
+  //   if (Session.get('streamReady') == true) {
+  //     console.log(document.getElementById('audio').duration);
+  //   }
+  // },
     getPlaybarNotice: function() {
         // console.log("getPlaybarNotice()");
         var postOnNow = Posts.find({isOnNow: true}).count(); //reactive
@@ -109,7 +126,7 @@ Template.header.helpers({
 });
 
 var onCanPlayHandler = function() {
-  // console.log("onCanPlayHandler()");
+  console.log("onCanPlayHandler()");
   Session.set('audioIsLoading', false);
   var audio = document.getElementById('audio');
   audio.play();
@@ -137,12 +154,17 @@ Template.header.events({
         var isStreamReady = Session.get('streamReady');
 
         if (isStreamReady && !Session.get('playbuttonClicked')){
+          console.log("click playbutton");
           Session.set('playbuttonClicked', true);
 
           var audio = document.getElementById('audio');
           audio.loop = false;
           var audioSrc = document.getElementById('audioSource');
           // console.log("audioSrc: " + audioSrc.src);
+
+          // console.log(audio);
+          // console.log(audio.duration);
+          // console.log(audio.currentTime);
 
           // Change button src/id immediately
           var button = document.getElementById('playbutton');
@@ -152,11 +174,11 @@ Template.header.events({
           if (playPosKeeper != null) {clearInterval(playPosKeeper); playPosKeeper = null;}
 
           if (!Session.get('audioIsLoading')) {
-            // console.log("audiois NOT loading");
+            console.log("audiois NOT loading");
             audio.currentTime = lastPlayTime; // keep last played time 
             audio.play();
           } else {
-            // console.log("audiois loading");
+            console.log("audiois loading");
             clearCanvas();
             audio.load();
             audio.addEventListener("canplay", onCanPlayHandler);
@@ -171,10 +193,19 @@ Template.header.events({
       Session.set('audioIsLoading', true);
       audio.removeEventListener("canplay", onCanPlayHandler);
 
-      if (!audio.paused){
+      if (!audio.paused) {
         audio.pause();
-        lastPlayTime = audio.currentTime;
-        playPosKeeper = setInterval(function() { lastPlayTime = lastPlayTime + 1; /* console.log(lastPlayTime); */}, 1000);
+        if (Session.get('isLiveStream') == true) {
+          lastPlayTime = audio.currentTime;
+          playPosKeeper = setInterval(function() {
+            lastPlayTime = lastPlayTime + 1;
+            console.log(lastPlayTime);
+          }, 1000);
+        } else {
+          if (playPosKeeper != null) {
+            clearInterval(playPosKeeper); playPosKeeper = null;
+          }
+        }
       }
 
       // Change element id, image 'pausebutton -> playbutton'
@@ -261,7 +292,7 @@ var progressHandler = function(_myAudio) {
     // document.getElementById('progress-amount').style.width = ((bufferedLen / duration)*100) + "%";
 
     // return bufferedLen;
-}
+};
 
 Template.header.rendered = function() {
 
